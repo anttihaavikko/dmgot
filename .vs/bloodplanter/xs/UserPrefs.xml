@@ -1,12 +1,15 @@
 ﻿<Properties StartupConfiguration="{A88FA4ED-6EA7-367D-4906-2D7BE2DE803D}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Dimmer.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Manager.cs">
     <Files>
-      <File FileName="Assets/Scripts/Farmer.cs" Line="81" Column="17" />
-      <File FileName="Assets/Scripts/Field.cs" Line="122" Column="6" />
+      <File FileName="Assets/Scripts/Farmer.cs" Line="37" Column="34" />
+      <File FileName="Assets/Scripts/Field.cs" Line="16" Column="5" />
       <File FileName="Assets/Scripts/Tile.cs" Line="69" Column="84" />
       <File FileName="Assets/Scripts/FarmerAnim.cs" Line="13" Column="1" />
       <File FileName="Assets/Scripts/Spot.cs" Line="15" Column="2" />
-      <File FileName="Assets/Scripts/Dimmer.cs" Line="12" Column="9" />
+      <File FileName="Assets/Scripts/Dimmer.cs" Line="13" Column="14" />
+      <File FileName="Assets/Scripts/SpeechBubble.cs" Line="111" Column="65" />
+      <File FileName="Assets/Scripts/Manager.cs" Line="23" Column="52" />
+      <File FileName="Assets/Scripts/AudioManager.cs" Line="49" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

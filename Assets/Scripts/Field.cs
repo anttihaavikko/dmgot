@@ -11,8 +11,10 @@ public class Field : MonoBehaviour
     public Transform helpText;
     public int fertilizers;
     public bool isOn = true;
+    public SpeechBubble bubble;
 
-    private readonly int gridSize = 10;
+    public const int GRIDSIZE = 10;
+
     private Tile[] grid;
     private bool showingHelp;
 
@@ -24,7 +26,7 @@ public class Field : MonoBehaviour
             return;
         }
 
-        grid = new Tile[gridSize * gridSize];
+        grid = new Tile[GRIDSIZE * GRIDSIZE];
 
         for (int i = 0; i < grid.Length; i++)
         {
@@ -43,12 +45,27 @@ public class Field : MonoBehaviour
                 val = 2;
             }
 
-            var pos = new Vector3(-gridSize * 0.5f + i % gridSize, -gridSize * 0.5f * 0.75f + Mathf.Floor(i / gridSize) * 0.75f, 0f);
+            var pos = new Vector3(-GRIDSIZE * 0.5f + i % GRIDSIZE, -GRIDSIZE * 0.5f * 0.75f + Mathf.Floor(i / GRIDSIZE) * 0.75f, 0f);
             var t = Instantiate(tile, pos, Quaternion.identity);
             t.transform.SetParent(transform);
 
             t.Setup(val);
             grid[i] = t;
+        }
+
+        if (Manager.Instance.hasData)
+        {
+            Manager.Instance.hasData = true;
+
+            for (int i = 0; i < grid.Length; i++)
+            {
+                grid[i].Setup(Manager.Instance.grid[i]);
+            }
+        }
+
+        if(Manager.Instance.didSleep)
+        {
+            Grow();
         }
     }
 
@@ -160,39 +177,39 @@ public class Field : MonoBehaviour
 
     private int GetTileIndex(Vector3 pos)
     {
-        var x = pos.x + gridSize * 0.5f;
-        var y = pos.y / 0.75f + gridSize * 0.5f;
-        if (x < 0 || x > gridSize - 0.1f || y < 0 || y > gridSize - 0.1f)
+        var x = pos.x + GRIDSIZE * 0.5f;
+        var y = pos.y / 0.75f + GRIDSIZE * 0.5f;
+        if (x < 0 || x > GRIDSIZE - 0.1f || y < 0 || y > GRIDSIZE - 0.1f)
         {
             return -1;
         }
 
-        return Mathf.RoundToInt(x + gridSize * y);
+        return Mathf.RoundToInt(x + GRIDSIZE * y);
     }
 
     private int Neighbors(int index)
     {
         var count = 0;
 
-        int x = index % gridSize;
-        int y = (int)Mathf.Floor(index / gridSize);
+        int x = index % GRIDSIZE;
+        int y = (int)Mathf.Floor(index / GRIDSIZE);
 
-        if (y < gridSize && IsPlant(x + (y + 1) * gridSize)) count++;
-        if (y > 0 && IsPlant(x + (y - 1) * gridSize)) count++;
-        if (x < gridSize && IsPlant(x + 1 + y * gridSize)) count++;
-        if (x > 0 && IsPlant(x - 1 + y * gridSize)) count++;
+        if (y < GRIDSIZE && IsPlant(x + (y + 1) * GRIDSIZE)) count++;
+        if (y > 0 && IsPlant(x + (y - 1) * GRIDSIZE)) count++;
+        if (x < GRIDSIZE && IsPlant(x + 1 + y * GRIDSIZE)) count++;
+        if (x > 0 && IsPlant(x - 1 + y * GRIDSIZE)) count++;
 
-        if (y < gridSize && x < gridSize && IsPlant(x + 1 + (y + 1) * gridSize)) count++;
-        if (y < gridSize && x > 0 && IsPlant(x - 1 + (y + 1) * gridSize)) count++;
-        if (y > 0 && x > 0 && IsPlant(x - 1 + (y - 1) * gridSize)) count++;
-        if (y > 0 && x < gridSize && IsPlant(x + 1 + (y - 1) * gridSize)) count++;
+        if (y < GRIDSIZE && x < GRIDSIZE && IsPlant(x + 1 + (y + 1) * GRIDSIZE)) count++;
+        if (y < GRIDSIZE && x > 0 && IsPlant(x - 1 + (y + 1) * GRIDSIZE)) count++;
+        if (y > 0 && x > 0 && IsPlant(x - 1 + (y - 1) * GRIDSIZE)) count++;
+        if (y > 0 && x < GRIDSIZE && IsPlant(x + 1 + (y - 1) * GRIDSIZE)) count++;
 
         return count;
     }
 
     private bool IsPlant(int i)
     {
-        return i >= 0 && i < gridSize * gridSize && (grid[i].type == Tile.PLANT || grid[i].type == Tile.FRUIT);
+        return i >= 0 && i < GRIDSIZE * GRIDSIZE && (grid[i].type == Tile.PLANT || grid[i].type == Tile.FRUIT);
     }
 
     // Update is called once per frame
@@ -206,7 +223,7 @@ public class Field : MonoBehaviour
 
     void Grow()
     {
-        var next = new int[gridSize * gridSize];
+        var next = new int[GRIDSIZE * GRIDSIZE];
         var index = 0;
         foreach (var t in grid)
         {
@@ -239,6 +256,41 @@ public class Field : MonoBehaviour
         for (int i = 0; i < next.Length; i++)
         {
             grid[i].Setup(next[i]);
+
+            Invoke("DoTutorialMessages", 1.25f);
+        }
+    }
+
+    void DoTutorialMessages()
+    {
+        for (int i = 0; i < grid.Length; i++)
+        {
+            if (grid[i].type == Tile.DEAD && !Manager.Instance.hasSeenDead)
+            {
+                Manager.Instance.hasSeenDead = true;
+                bubble.QueMessage("Oh bummer!\nThat plant (withered away).");
+                bubble.QueMessage("Well, at least I can use it as (fertilizer)...");
+            }
+
+            if (grid[i].type == Tile.FRUIT && !Manager.Instance.hasSeenFruit)
+            {
+                Manager.Instance.hasSeenFruit = true;
+                bubble.QueMessage("Sweet, I've got some (crop). Time to (harvest)!");
+            }
+        }
+
+        bubble.CheckQueuedMessages();
+    }
+
+    public void SaveGrid()
+    {
+        if(isOn)
+        {
+            Manager.Instance.hasData = true;
+            for (int i = 0; i < grid.Length; i++)
+            {
+                Manager.Instance.grid[i] = grid[i].type;
+            }
         }
     }
 }

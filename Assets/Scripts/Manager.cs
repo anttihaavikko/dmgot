@@ -5,7 +5,16 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Manager : MonoBehaviour {
-	private static Manager instance = null;
+
+    public int[] grid;
+    public bool justStarted = true;
+    public bool hasData = false;
+    public bool didSleep = false;
+
+    public bool hasSeenDead = false;
+    public bool hasSeenFruit = false;
+
+    private static Manager instance = null;
 	public static Manager Instance {
 		get { return instance; }
 	}
@@ -16,6 +25,8 @@ public class Manager : MonoBehaviour {
 			return;
 		} else {
 			instance = this;
-		}
+            grid = new int[Field.GRIDSIZE * Field.GRIDSIZE];
+            DontDestroyOnLoad(instance.gameObject);
+        }
 	}
 }

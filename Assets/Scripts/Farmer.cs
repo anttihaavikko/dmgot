@@ -11,6 +11,7 @@ public class Farmer : MonoBehaviour
     public bool isOutside = true;
     public Dimmer dimmer;
     public Spot doorSpot;
+    public SpeechBubble bubble;
 
     private Vector3 pos;
     private bool locked;
@@ -23,9 +24,17 @@ public class Farmer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        pos = transform.position;
+        if(Manager.Instance.justStarted)
+        {
+            transform.position = Vector3.zero;
+            Manager.Instance.justStarted = false;
+        }
+        else
+        {
+            Invoke("ShowHelpAfterDim", Dimmer.speed);
+        }
 
-        Invoke("ShowHelpAfterDim", Dimmer.speed);
+        pos = transform.position;
     }
 
     // Update is called once per frame
@@ -39,6 +48,11 @@ public class Farmer : MonoBehaviour
         if(Input.GetButtonDown("Interact"))
         {
             Interact();
+        }
+
+        if (Application.isEditor && Input.GetKeyDown(KeyCode.Q))
+        {
+            bubble.ShowMessage("This is a test (message) that is (there) or something!");
         }
     }
 
@@ -103,7 +117,12 @@ public class Farmer : MonoBehaviour
 
     private void Interact()
     {
-        if(field && isOutside && !spot)
+        if(bubble.IsShown())
+        {
+            return;
+        }
+
+        if (field && isOutside && !spot)
         {
             anim.ResetTrigger("Act");
             anim.ResetTrigger("Cut");
@@ -148,6 +167,7 @@ public class Farmer : MonoBehaviour
 
     public void ChangeScene(string scene)
     {
+        field.SaveGrid();
         dimmer.Close();
         sceneToSwitch = scene;
         Invoke("DoChangeScene", Dimmer.speed);
@@ -156,5 +176,17 @@ public class Farmer : MonoBehaviour
     void DoChangeScene()
     {
         SceneManager.LoadSceneAsync(sceneToSwitch);
+    }
+
+    public void Sleep()
+    {
+        Manager.Instance.didSleep = true;
+        dimmer.Close();
+        Invoke("OpenDimmer", 2f);
+    }
+
+    void OpenDimmer()
+    {
+        dimmer.Open();
     }
 }

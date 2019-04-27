@@ -7,6 +7,12 @@ public class Dimmer : MonoBehaviour
     public Transform upper, lower;
     public const float speed = 0.8f;
 
+    private void Awake()
+    {
+        upper.transform.localScale = Vector3.one;
+        lower.transform.localScale = Vector3.one;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
