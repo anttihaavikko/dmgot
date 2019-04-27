@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.PostProcessing;
 
 public class Farmer : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class Farmer : MonoBehaviour
     public MidScene mid;
     public Spot doorSpot;
     public SpeechBubble bubble;
+    public PostProcessingBehaviour filters;
+    public Fruit tableFruit;
 
     private Vector3 pos;
     private bool locked;
@@ -25,7 +28,9 @@ public class Farmer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(Manager.Instance.justStarted)
+        UpdateSaturation();
+
+        if (Manager.Instance.justStarted)
         {
             transform.position = Vector3.zero;
             Manager.Instance.justStarted = false;
@@ -119,6 +124,12 @@ public class Farmer : MonoBehaviour
         }
     }
 
+    void ResetTriggers()
+    {
+        anim.ResetTrigger("Act");
+        anim.ResetTrigger("Cut");
+    }
+
     private void Interact()
     {
         if(bubble.IsShown())
@@ -128,8 +139,7 @@ public class Farmer : MonoBehaviour
 
         if (field && isOutside && !spot)
         {
-            anim.ResetTrigger("Act");
-            anim.ResetTrigger("Cut");
+            ResetTriggers();
 
             var tileType = field.GetTileType(pos);
 
@@ -194,10 +204,51 @@ public class Farmer : MonoBehaviour
         dimmer.Close();
         mid.Show("DAY " + Manager.Instance.day, "$" + Manager.Instance.cash);
         Invoke("OpenDimmer", 4f);
+
+        if(Manager.Instance.hasEaten && Manager.Instance.cuts < 5)
+        {
+            Manager.Instance.cuts = 0;
+            Invoke("UpdateSaturation", 4f);
+        }
+
+        Manager.Instance.hasEaten = false;
     }
 
     void OpenDimmer()
     {
+        if (tableFruit)
+            tableFruit.Show();
+
         dimmer.Open();
+    }
+
+    public void Bleed()
+    {
+        Manager.Instance.cuts++;
+        UpdateSaturation();
+    }
+
+    public void UpdateSaturation()
+    {
+        ColorGradingModel.Settings g = filters.profile.colorGrading.settings;
+        g.basic.saturation = 1f - 0.2f * Manager.Instance.cuts;
+        filters.profile.colorGrading.settings = g;
+    }
+
+    public void Eat()
+    {
+        if (!tableFruit || !tableFruit.gameObject.activeInHierarchy)
+        {
+            bubble.ShowMessage("Unfortunately, there is (nothing) to eat.");
+        }
+
+        if (tableFruit && Manager.Instance.cash > 0)
+        {
+            Manager.Instance.cash--;
+            Manager.Instance.hasEaten = true;
+            ResetTriggers();
+            anim.SetTrigger("Act");
+            tableFruit.gameObject.SetActive(false);
+        }
     }
 }

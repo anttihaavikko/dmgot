@@ -29,6 +29,7 @@ public class SpeechBubble : MonoBehaviour {
     string hiliteColorHex;
 
     bool useColors = true;
+    private bool canSkip = false;
 
 	// Use this for initialization
 	void Awake () {
@@ -40,6 +41,8 @@ public class SpeechBubble : MonoBehaviour {
 		messageQue = new List<string> ();
 
         SetColor(hiliteColor);
+
+        Invoke("EnableSkip", 0.25f);
 	}
 
     void ShowHelp()
@@ -52,16 +55,23 @@ public class SpeechBubble : MonoBehaviour {
         Tweener.Instance.ScaleTo(helpIcon, new Vector3(2f, 0f, 1f), 0.3f, 0f, TweenEasings.QuarticEaseIn);
     }
 
+    void EnableSkip()
+    {
+        canSkip = true;
+    }
+
     // Update is called once per frame
     void Update () {
 
-		if (shown && Input.GetButtonDown("Interact")) {
+        if (Input.GetButtonUp("Interact"))
+            EnableSkip();
+
+		if (shown && Input.GetButtonDown("Interact") && canSkip) {
             HideHelp();
 
 			if (!done) {
 				done = true;
 				messagePos = -1;
-
                 textArea.text = useColors ? message.Replace("(", "<color=" + hiliteColorHex + ">").Replace(")", "</color>") : message;
 			} else {
 				if (messageQue.Count > 0) {
@@ -121,7 +131,10 @@ public class SpeechBubble : MonoBehaviour {
 	}
 
 	public void ShowMessage(string str, bool colors = true) {
-		//AudioManager.Instance.PlayEffectAt (13, Vector3.zero, 0.5f);
+        canSkip = false;
+        Invoke("EnableSkip", 0.25f);
+
+        //AudioManager.Instance.PlayEffectAt (13, Vector3.zero, 0.5f);
 
         useColors = colors;
 

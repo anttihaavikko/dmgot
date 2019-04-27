@@ -10,9 +10,11 @@ public class Manager : MonoBehaviour {
     public bool justStarted = true;
     public bool hasData = false;
     public bool didSleep = false;
+    public bool hasEaten = false;
 
     public int cash = 0;
     public int day = 1;
+    public int cuts = 0;
 
     public bool hasSeenDead = false;
     public bool hasSeenFruit = false;

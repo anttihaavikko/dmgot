@@ -5,8 +5,6 @@ using UnityEngine.PostProcessing;
 
 public class EffectCamera : MonoBehaviour {
 
-	public Material transitionMaterial;
-
 	private float cutoff = 1f, targetCutoff = 1f;
 	private float prevCutoff = 1f;
 	private float cutoffPos = 0f;
@@ -27,11 +25,6 @@ public class EffectCamera : MonoBehaviour {
 	}
 
 	void Update() {
-		cutoffPos += Time.fixedDeltaTime / transitionTime;
-		cutoffPos = (cutoffPos > 1f) ? 1f : cutoffPos;
-		cutoff = Mathf.Lerp (prevCutoff, targetCutoff, cutoffPos);
-		transitionMaterial.SetFloat ("_Cutoff", cutoff);
-
 		// chromatic aberration update
 		if (filters) {
 			chromaAmount = Mathf.MoveTowards (chromaAmount, 0, Time.deltaTime * chromaSpeed);
@@ -50,12 +43,6 @@ public class EffectCamera : MonoBehaviour {
 
 	void StartFade() {
 		Fade (false, 0.5f);
-	}
-
-	void OnRenderImage(RenderTexture src, RenderTexture dst) {
-		if (transitionMaterial) {
-			Graphics.Blit (src, dst, transitionMaterial);
-		}
 	}
 
 	public void Fade(bool show, float delay) {

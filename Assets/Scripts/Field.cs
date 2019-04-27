@@ -115,7 +115,7 @@ public class Field : MonoBehaviour
                 interactText.text = "HARVEST";
                 return;
             case Tile.DEAD:
-                interactText.text = "CLEAN";
+                interactText.text = "GATHER";
                 return;
             default:
                 AnimateHelpOut();

@@ -9,4 +9,9 @@ public class FarmerAnim : MonoBehaviour
     public void Interact() {
         farmer.DoInteract();
     }
+
+    public void Bleed()
+    {
+        farmer.Bleed();
+    }
 }

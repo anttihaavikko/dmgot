@@ -10,9 +10,12 @@ public class Fruit : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Show();
+    }
+
+    public void Show()
+    {
         spriteRenderer.sprite = sprites[Random.Range(0, sprites.Length)];
-
         gameObject.SetActive(Manager.Instance.cash > 0);
-
     }
 }
