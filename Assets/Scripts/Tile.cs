@@ -6,7 +6,7 @@ using UnityEngine;
 public class Tile : MonoBehaviour
 {
     public GameObject grass, fertilizer, plant, fruit, planted;
-    public Color plantColor, deadColor;
+    public Color[] plantColors, deadColors;
     public int type = 0;
     public SpriteRenderer plantSprite, fruitSprite;
 
@@ -65,8 +65,8 @@ public class Tile : MonoBehaviour
 
     private void UpdateView()
     {
-        if (type >= PLANT) plantSprite.color = plantColor;
-        if (type == DEAD) plantSprite.color = deadColor;
+        if (type >= PLANT) plantSprite.color = plantColors[Random.Range(0, plantColors.Length)];
+        if (type == DEAD) plantSprite.color = deadColors[Random.Range(0, deadColors.Length)];
 
         fertilizer.SetActive(type == FERTILIZED);
         grass.SetActive(type >= GRASS);
@@ -77,6 +77,11 @@ public class Tile : MonoBehaviour
 
     private void Randomize()
     {
+        if(type >= PLANT)
+        {
+            plant.transform.localScale = Vector3.one * Random.Range(0.9f, 1.1f);
+        }
+
         if (type == FRUIT)
         {
             fruitSprite.sprite = fruitSprites[Random.Range(0, fruitSprites.Length)];
