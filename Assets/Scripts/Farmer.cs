@@ -16,6 +16,8 @@ public class Farmer : MonoBehaviour
     public SpeechBubble bubble;
     public PostProcessingBehaviour filters;
     public Fruit tableFruit;
+    public EffectCamera cam;
+    public Transform bleedPoint;
 
     private Vector3 pos;
     private bool locked;
@@ -226,6 +228,10 @@ public class Farmer : MonoBehaviour
     {
         Manager.Instance.cuts++;
         UpdateSaturation();
+
+        cam.BaseEffect(Manager.Instance.cuts * 1f);
+
+        EffectManager.Instance.AddEffect(0, bleedPoint.position);
     }
 
     public void UpdateSaturation()

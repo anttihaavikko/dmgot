@@ -410,6 +410,36 @@ MonoBehaviour:
   offset: 0
   noNegatives: 1
   direction: {x: 0, y: 0.1, z: 0}
+--- !u!1 &144155524402640883
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4255134480818936380}
+  m_Layer: 0
+  m_Name: Bleed Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4255134480818936380
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144155524402640883}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.038, y: -0.663, z: -0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4536724985155871666}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4536724983697308533
 GameObject:
   m_ObjectHideFlags: 0
@@ -1523,8 +1553,13 @@ MonoBehaviour:
     m_Bits: 256
   isOutside: 1
   dimmer: {fileID: 0}
+  mid: {fileID: 0}
   doorSpot: {fileID: 0}
   bubble: {fileID: 1171483850}
+  filters: {fileID: 0}
+  tableFruit: {fileID: 0}
+  cam: {fileID: 0}
+  bleedPoint: {fileID: 4255134480818936380}
 --- !u!1 &4536724984429755471
 GameObject:
   m_ObjectHideFlags: 0
@@ -2773,7 +2808,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0.6913571, w: 0.7225133}
   m_LocalPosition: {x: 0.624, y: -2.075, z: 0}
   m_LocalScale: {x: 0.79645413, y: 0.7964539, z: 0.24839483}
-  m_Children: []
+  m_Children:
+  - {fileID: 4255134480818936380}
   m_Father: {fileID: 4536724984211185271}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -87.475006}

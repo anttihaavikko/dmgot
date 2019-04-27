@@ -65,7 +65,7 @@ public class EffectCamera : MonoBehaviour {
 	}
 
 	public void BaseEffect(float mod = 1f) {
-		Shake (0.04f * mod, 0.075f * mod);
-		Chromate (0.25f * mod, 0.1f * mod);
+		Shake (0.08f * mod, 0.1f * mod);
+		Chromate (0.5f * mod, 0.3f * mod);
 	}
 }
