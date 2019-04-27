@@ -38,6 +38,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Bg
+    uniqueID: 1919452823
+    locked: 0
   - name: Tiles
     uniqueID: 2895006851
     locked: 0
