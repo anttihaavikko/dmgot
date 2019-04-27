@@ -1,0 +1,15 @@
+﻿<Properties StartupConfiguration="{A88FA4ED-6EA7-367D-4906-2D7BE2DE803D}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Field.cs">
+    <Files>
+      <File FileName="Assets/Scripts/Farmer.cs" Line="37" Column="42" />
+      <File FileName="Assets/Scripts/Field.cs" Line="7" Column="12" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
