@@ -9,6 +9,7 @@ public class Field : MonoBehaviour
     public Tile tile;
     public TextMeshPro interactText;
     public Transform helpText;
+    public int fertilizers;
 
     private readonly int gridSize = 10;
     private Tile[] grid;
@@ -47,21 +48,31 @@ public class Field : MonoBehaviour
     public void Entered(Vector3 pos)
     {
         var index = GetTileIndex(pos);
+        UpdateHelpFor(index);
+    }
 
-        interactText.text = index > -1 ? "INTERACT" : "";
-
-        if(index == -1)
+    private void UpdateHelpFor(int index)
+    {
+        if (index == -1)
         {
-            Tweener.Instance.ScaleTo(helpText, new Vector3(1.5f, 0f, 1f), 0.2f, 0f, TweenEasings.QuarticEaseIn);
+            AnimateHelpOut();
             interactText.text = "";
             return;
         }
 
-        AnimateHelp();
+        AnimateHelpIn();
 
-        switch (grid[index].type) {
+        switch (grid[index].type)
+        {
             case Tile.NONE:
-                interactText.text = "FERTILIZE";
+                if (fertilizers > 0)
+                {
+                    interactText.text = "FERTILIZE";
+                }
+                else
+                {
+                    AnimateHelpOut();
+                }
                 return;
             case Tile.GRASS:
                 interactText.text = "PLANT";
@@ -72,12 +83,19 @@ public class Field : MonoBehaviour
             case Tile.DEAD:
                 interactText.text = "CLEAN";
                 return;
+            default:
+                AnimateHelpOut();
+                return;
         }
     }
 
-    private void AnimateHelp()
+    private void AnimateHelpOut()
     {
-        Debug.Log("Anim in");
+        Tweener.Instance.ScaleTo(helpText, new Vector3(1.5f, 0f, 1f), 0.2f, 0f, TweenEasings.QuarticEaseIn);
+    }
+
+    private void AnimateHelpIn()
+    {
         Tweener.Instance.ScaleTo(helpText, Vector3.one, 0.2f, 0f, TweenEasings.BounceEaseOut);
     }
 
@@ -99,7 +117,22 @@ public class Field : MonoBehaviour
 
         if(index > -1)
         {
-            grid[index].Interact();
+            var tileType = GetTileType(pos);
+            if(tileType == Tile.NONE)
+            {
+                if(fertilizers > 0)
+                {
+                    fertilizers--;
+                    grid[index].Interact();
+                }
+            }
+            else
+            {
+                grid[index].Interact();
+            }
+
+
+            UpdateHelpFor(index);
         }
     }
 

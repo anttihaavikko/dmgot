@@ -59,7 +59,14 @@ public class Farmer : MonoBehaviour
             anim.ResetTrigger("Act");
             anim.ResetTrigger("Cut");
 
-            if(field.GetTileType(pos) == Tile.GRASS)
+            var tileType = field.GetTileType(pos);
+
+            if (tileType == Tile.DEAD)
+            {
+                field.fertilizers++;
+            }
+
+            if (tileType == Tile.GRASS)
             {
                 anim.SetTrigger("Cut");
                 locked = true;
