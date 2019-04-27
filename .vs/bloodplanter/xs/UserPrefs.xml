@@ -1,15 +1,17 @@
 ﻿<Properties StartupConfiguration="{A88FA4ED-6EA7-367D-4906-2D7BE2DE803D}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Manager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MidScene.cs">
     <Files>
-      <File FileName="Assets/Scripts/Farmer.cs" Line="37" Column="34" />
-      <File FileName="Assets/Scripts/Field.cs" Line="16" Column="5" />
+      <File FileName="Assets/Scripts/Farmer.cs" Line="139" Column="43" />
+      <File FileName="Assets/Scripts/Field.cs" Line="126" Column="107" />
       <File FileName="Assets/Scripts/Tile.cs" Line="69" Column="84" />
       <File FileName="Assets/Scripts/FarmerAnim.cs" Line="13" Column="1" />
       <File FileName="Assets/Scripts/Spot.cs" Line="15" Column="2" />
       <File FileName="Assets/Scripts/Dimmer.cs" Line="13" Column="14" />
-      <File FileName="Assets/Scripts/SpeechBubble.cs" Line="111" Column="65" />
-      <File FileName="Assets/Scripts/Manager.cs" Line="23" Column="52" />
-      <File FileName="Assets/Scripts/AudioManager.cs" Line="49" Column="3" />
+      <File FileName="Assets/Scripts/SpeechBubble.cs" Line="59" Column="13" />
+      <File FileName="Assets/Scripts/Manager.cs" Line="9" Column="23" />
+      <File FileName="Assets/Scripts/AudioManager.cs" Line="19" Column="52" />
+      <File FileName="Assets/Scripts/Fruit.cs" Line="13" Column="12" />
+      <File FileName="Assets/Scripts/MidScene.cs" Line="7" Column="22" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

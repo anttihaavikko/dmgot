@@ -32,15 +32,17 @@ public class Field : MonoBehaviour
         {
             var val = 0;
 
-            if(i == 44 ||
+            if(
+                //i == 44 ||
                 i == 45 ||
-                i == 46 ||
+                //i == 46 ||
                 i == 54 ||
                 i == 55 ||
                 i == 56 ||
-                i == 64 ||
-                i == 65 ||
-                i == 66)
+                //i == 64 ||
+                i == 65
+                //i == 66
+                )
             {
                 val = 2;
             }
@@ -66,6 +68,7 @@ public class Field : MonoBehaviour
         if(Manager.Instance.didSleep)
         {
             Grow();
+            Manager.Instance.didSleep = false;
         }
     }
 

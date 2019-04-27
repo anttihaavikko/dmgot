@@ -142,10 +142,12 @@
     <Compile Include="Assets\Scripts\Field.cs" />
     <Compile Include="Assets\Scripts\FlyingText.cs" />
     <Compile Include="Assets\Scripts\FollowCamera.cs" />
+    <Compile Include="Assets\Scripts\Fruit.cs" />
     <Compile Include="Assets\Scripts\GeometryFromColliderScript.cs" />
     <Compile Include="Assets\Scripts\HudManager.cs" />
     <Compile Include="Assets\Scripts\InputMagic.cs" />
     <Compile Include="Assets\Scripts\Manager.cs" />
+    <Compile Include="Assets\Scripts\MidScene.cs" />
     <Compile Include="Assets\Scripts\Mover.cs" />
     <Compile Include="Assets\Scripts\OptionsView.cs" />
     <Compile Include="Assets\Scripts\Pulsate.cs" />

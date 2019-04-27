@@ -11,6 +11,9 @@ public class Manager : MonoBehaviour {
     public bool hasData = false;
     public bool didSleep = false;
 
+    public int cash = 0;
+    public int day = 1;
+
     public bool hasSeenDead = false;
     public bool hasSeenFruit = false;
 

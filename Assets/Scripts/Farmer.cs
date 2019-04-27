@@ -10,6 +10,7 @@ public class Farmer : MonoBehaviour
     public LayerMask blockMask, spotMask;
     public bool isOutside = true;
     public Dimmer dimmer;
+    public MidScene mid;
     public Spot doorSpot;
     public SpeechBubble bubble;
 
@@ -90,6 +91,9 @@ public class Farmer : MonoBehaviour
         pos = target;
 
         if (Mathf.Abs(dx) > 0f || Mathf.Abs(dy) > 0f) {
+
+            CancelInvoke("ShowHelpAfterDim");
+
             Tweener.Instance.MoveTo(transform, pos, 0.07f, 0f, TweenEasings.BounceEaseOut);
 
             if(helpShown)
@@ -132,6 +136,11 @@ public class Farmer : MonoBehaviour
             if (tileType == Tile.DEAD)
             {
                 field.fertilizers++;
+            }
+
+            if(tileType == Tile.FRUIT)
+            {
+                Manager.Instance.cash += 5;
             }
 
             if (tileType == Tile.GRASS)
@@ -180,9 +189,11 @@ public class Farmer : MonoBehaviour
 
     public void Sleep()
     {
+        Manager.Instance.day++;
         Manager.Instance.didSleep = true;
         dimmer.Close();
-        Invoke("OpenDimmer", 2f);
+        mid.Show("DAY " + Manager.Instance.day, "$" + Manager.Instance.cash);
+        Invoke("OpenDimmer", 4f);
     }
 
     void OpenDimmer()
