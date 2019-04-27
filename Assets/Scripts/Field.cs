@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Field : MonoBehaviour
 {
     public Tile tile;
-    public Text interactText;
+    public TextMeshPro interactText;
 
     private readonly int gridSize = 10;
     private Tile[] grid;
@@ -15,9 +16,23 @@ public class Field : MonoBehaviour
     void Start()
     {
         grid = new Tile[gridSize * gridSize];
-        for(int i = 0; i < grid.Length; i++)
+
+        for (int i = 0; i < grid.Length; i++)
         {
             var val = 0;
+
+            if(i == 44 ||
+                i == 45 ||
+                i == 46 ||
+                i == 54 ||
+                i == 55 ||
+                i == 56 ||
+                i == 64 ||
+                i == 65 ||
+                i == 66)
+            {
+                val = 2;
+            }
 
             var pos = new Vector3(-gridSize * 0.5f + i % gridSize, -gridSize * 0.5f * 0.75f + Mathf.Floor(i / gridSize) * 0.75f, 0f);
             var t = Instantiate(tile, pos, Quaternion.identity);
@@ -59,6 +74,18 @@ public class Field : MonoBehaviour
         }
     }
 
+    public int GetTileType(Vector3 pos)
+    {
+        var index = GetTileIndex(pos);
+
+        if (index > -1)
+        {
+            return grid[index].type;
+        }
+
+        return -1;
+    }
+
     public void Interact(Vector3 pos)
     {
         var index = GetTileIndex(pos);
@@ -92,6 +119,11 @@ public class Field : MonoBehaviour
         if (y > 0 && IsPlant(x + (y - 1) * gridSize)) count++;
         if (x < gridSize && IsPlant(x + 1 + y * gridSize)) count++;
         if (x > 0 && IsPlant(x - 1 + y * gridSize)) count++;
+
+        if (y < gridSize && x < gridSize && IsPlant(x + 1 + (y + 1) * gridSize)) count++;
+        if (y < gridSize && x > 0 && IsPlant(x - 1 + (y + 1) * gridSize)) count++;
+        if (y > 0 && x > 0 && IsPlant(x - 1 + (y - 1) * gridSize)) count++;
+        if (y > 0 && x < gridSize && IsPlant(x + 1 + (y - 1) * gridSize)) count++;
 
         return count;
     }

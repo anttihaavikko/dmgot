@@ -8,6 +8,7 @@ public class Farmer : MonoBehaviour
     public Animator anim;
 
     private Vector3 pos;
+    private bool locked;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +19,9 @@ public class Farmer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (locked)
+            return;
+
         DoMove();
 
         if(Input.GetButtonDown("Interact"))
@@ -52,8 +56,31 @@ public class Farmer : MonoBehaviour
         if(field)
         {
             anim.ResetTrigger("Act");
-            anim.SetTrigger("Act");
-            field.Interact(pos);
+            anim.ResetTrigger("Cut");
+
+            if(field.GetTileType(pos) == Tile.GRASS)
+            {
+                anim.SetTrigger("Cut");
+                locked = true;
+                Invoke("Unlock", 1f);
+            }
+            else
+            {
+                anim.SetTrigger("Act");
+                field.Interact(pos);
+                locked = true;
+                Invoke("Unlock", 0.15f);
+            }
         }
+    }
+
+    public void DoInteract()
+    {
+        field.Interact(pos);
+    }
+
+    private void Unlock()
+    {
+        locked = false;
     }
 }

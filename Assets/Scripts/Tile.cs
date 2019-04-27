@@ -1,13 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Anima2D;
 using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    public GameObject grass, fertilizer, plant, fruit;
+    public GameObject grass, fertilizer, plant, fruit, planted;
     public Color plantColor, deadColor;
     public int type = 0;
-    public SpriteRenderer plantSprite;
+    public SpriteRenderer plantSprite, fruitSprite;
+
+    public Transform[] fruitPos;
+    public Sprite[] fruitSprites;
 
     public const int NONE = 0;
     public const int FERTILIZED = 1;
@@ -54,6 +58,8 @@ public class Tile : MonoBehaviour
         if (type == FERTILIZED || type == PLANTED || type == PLANT || type == FRUIT)
             type++;
 
+        Randomize();
+
         UpdateView();
     }
 
@@ -66,5 +72,18 @@ public class Tile : MonoBehaviour
         grass.SetActive(type >= GRASS);
         plant.SetActive(type >= PLANT);
         fruit.SetActive(type == FRUIT);
+        planted.SetActive(type == PLANTED);
+    }
+
+    private void Randomize()
+    {
+        if (type == FRUIT)
+        {
+            fruitSprite.sprite = fruitSprites[Random.Range(0, fruitSprites.Length)];
+            fruit.transform.position = fruitPos[Random.Range(0, fruitPos.Length)].position;
+        }
+
+        float mod = Random.value < 0.5f ? -1f : 1f;
+        plant.transform.localScale = new Vector3(plant.transform.localScale.x * mod, plant.transform.localScale.y, plant.transform.localScale.z);
     }
 }
