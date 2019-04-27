@@ -159,7 +159,7 @@ public class Farmer : MonoBehaviour
             {
                 anim.SetTrigger("Cut");
                 locked = true;
-                Invoke("Unlock", 1f);
+                Invoke("Unlock", 1.5f);
             }
             else
             {
