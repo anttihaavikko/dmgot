@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Farmer : MonoBehaviour
 {
+    public Field field;
+    public Animator anim;
 
-    private float moveDelay = 0f;
     private Vector3 pos;
 
     // Start is called before the first frame update
@@ -18,6 +19,11 @@ public class Farmer : MonoBehaviour
     void Update()
     {
         DoMove();
+
+        if(Input.GetButtonDown("Interact"))
+        {
+            Interact();
+        }
     }
 
     private void DoMove()
@@ -37,5 +43,17 @@ public class Farmer : MonoBehaviour
         pos += new Vector3(dx, dy * 0.75f, 0);
 
         Tweener.Instance.MoveTo(transform, pos, 0.07f, 0f, TweenEasings.BounceEaseOut);
+
+        field.Entered(pos);
+    }
+
+    private void Interact()
+    {
+        if(field)
+        {
+            anim.ResetTrigger("Act");
+            anim.SetTrigger("Act");
+            field.Interact(pos);
+        }
     }
 }

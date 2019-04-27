@@ -148,6 +148,7 @@
     <Compile Include="Assets\Scripts\OptionsView.cs" />
     <Compile Include="Assets\Scripts\Shine.cs" />
     <Compile Include="Assets\Scripts\SoundEffect.cs" />
+    <Compile Include="Assets\Scripts\Tile.cs" />
     <Compile Include="Assets\Scripts\Triangulator.cs" />
     <Compile Include="Assets\Scripts\TweenAction.cs" />
     <Compile Include="Assets\Scripts\TweenEasings.cs" />
