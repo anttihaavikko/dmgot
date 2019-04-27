@@ -1,10 +1,12 @@
 ﻿<Properties StartupConfiguration="{A88FA4ED-6EA7-367D-4906-2D7BE2DE803D}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/FarmerAnim.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Dimmer.cs">
     <Files>
-      <File FileName="Assets/Scripts/Farmer.cs" Line="64" Column="37" />
-      <File FileName="Assets/Scripts/Field.cs" Line="71" Column="40" />
-      <File FileName="Assets/Scripts/Tile.cs" Line="61" Column="21" />
-      <File FileName="Assets/Scripts/FarmerAnim.cs" Line="13" Column="5" />
+      <File FileName="Assets/Scripts/Farmer.cs" Line="81" Column="17" />
+      <File FileName="Assets/Scripts/Field.cs" Line="122" Column="6" />
+      <File FileName="Assets/Scripts/Tile.cs" Line="69" Column="84" />
+      <File FileName="Assets/Scripts/FarmerAnim.cs" Line="13" Column="1" />
+      <File FileName="Assets/Scripts/Spot.cs" Line="15" Column="2" />
+      <File FileName="Assets/Scripts/Dimmer.cs" Line="12" Column="9" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

@@ -133,6 +133,7 @@
     <Compile Include="Assets\Scripts\AutoEnd.cs" />
     <Compile Include="Assets\Scripts\BoneToLine.cs" />
     <Compile Include="Assets\Scripts\BoxOutlinerScript.cs" />
+    <Compile Include="Assets\Scripts\Dimmer.cs" />
     <Compile Include="Assets\Scripts\EffectCamera.cs" />
     <Compile Include="Assets\Scripts\EffectManager.cs" />
     <Compile Include="Assets\Scripts\Face.cs" />
@@ -151,6 +152,7 @@
     <Compile Include="Assets\Scripts\Rotator.cs" />
     <Compile Include="Assets\Scripts\Shine.cs" />
     <Compile Include="Assets\Scripts\SoundEffect.cs" />
+    <Compile Include="Assets\Scripts\Spot.cs" />
     <Compile Include="Assets\Scripts\Tile.cs" />
     <Compile Include="Assets\Scripts\Triangulator.cs" />
     <Compile Include="Assets\Scripts\TweenAction.cs" />

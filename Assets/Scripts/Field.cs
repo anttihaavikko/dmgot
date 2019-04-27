@@ -10,13 +10,20 @@ public class Field : MonoBehaviour
     public TextMeshPro interactText;
     public Transform helpText;
     public int fertilizers;
+    public bool isOn = true;
 
     private readonly int gridSize = 10;
     private Tile[] grid;
+    private bool showingHelp;
 
     // Start is called before the first frame update
     void Start()
     {
+        if(!isOn)
+        {
+            return;
+        }
+
         grid = new Tile[gridSize * gridSize];
 
         for (int i = 0; i < grid.Length; i++)
@@ -55,12 +62,19 @@ public class Field : MonoBehaviour
     {
         if (index == -1)
         {
-            AnimateHelpOut();
+            if(showingHelp)
+                AnimateHelpOut();
+
             interactText.text = "";
             return;
         }
 
         AnimateHelpIn();
+
+        if (!isOn)
+        {
+            return;
+        }
 
         switch (grid[index].type)
         {
@@ -89,13 +103,21 @@ public class Field : MonoBehaviour
         }
     }
 
-    private void AnimateHelpOut()
+    public void AnimateHelpOut()
     {
+        showingHelp = false;
         Tweener.Instance.ScaleTo(helpText, new Vector3(1.5f, 0f, 1f), 0.2f, 0f, TweenEasings.QuarticEaseIn);
     }
 
     private void AnimateHelpIn()
     {
+        showingHelp = true;
+        Tweener.Instance.ScaleTo(helpText, Vector3.one, 0.2f, 0f, TweenEasings.BounceEaseOut);
+    }
+
+    public void ShowHelp(string action)
+    {
+        interactText.text = action;
         Tweener.Instance.ScaleTo(helpText, Vector3.one, 0.2f, 0f, TweenEasings.BounceEaseOut);
     }
 
