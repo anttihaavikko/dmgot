@@ -8,6 +8,7 @@ public class Field : MonoBehaviour
 {
     public Tile tile;
     public TextMeshPro interactText;
+    public Transform helpText;
 
     private readonly int gridSize = 10;
     private Tile[] grid;
@@ -51,9 +52,12 @@ public class Field : MonoBehaviour
 
         if(index == -1)
         {
+            Tweener.Instance.ScaleTo(helpText, new Vector3(1.5f, 0f, 1f), 0.2f, 0f, TweenEasings.QuarticEaseIn);
             interactText.text = "";
             return;
         }
+
+        AnimateHelp();
 
         switch (grid[index].type) {
             case Tile.NONE:
@@ -68,10 +72,13 @@ public class Field : MonoBehaviour
             case Tile.DEAD:
                 interactText.text = "CLEAN";
                 return;
-            default:
-                interactText.text = "";
-                return;
         }
+    }
+
+    private void AnimateHelp()
+    {
+        Debug.Log("Anim in");
+        Tweener.Instance.ScaleTo(helpText, Vector3.one, 0.2f, 0f, TweenEasings.BounceEaseOut);
     }
 
     public int GetTileType(Vector3 pos)

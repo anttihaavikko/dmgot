@@ -46,9 +46,10 @@ public class Farmer : MonoBehaviour
 
         pos += new Vector3(dx, dy * 0.75f, 0);
 
-        Tweener.Instance.MoveTo(transform, pos, 0.07f, 0f, TweenEasings.BounceEaseOut);
-
-        field.Entered(pos);
+        if (Mathf.Abs(dx) > 0f || Mathf.Abs(dy) > 0f) {
+            Tweener.Instance.MoveTo(transform, pos, 0.07f, 0f, TweenEasings.BounceEaseOut);
+            field.Entered(pos);
+        }
     }
 
     private void Interact()
