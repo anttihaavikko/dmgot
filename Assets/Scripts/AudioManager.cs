@@ -93,9 +93,9 @@ public class AudioManager : MonoBehaviour {
 	void Update() {
 
 		float targetPitch = 1f;
-		float targetLowpass = (doingLowpass) ? 5000f : 22000;
-		float targetHighpass = (doingHighpass) ? 400f : 10f;
-		float changeSpeed = 0.075f;
+		float targetLowpass = (doingLowpass) ? 4000f : 22000;
+		float targetHighpass = (doingHighpass) ? 1500f : 10f;
+		float changeSpeed = 0.15f;
 
 		curMusic.pitch = Mathf.MoveTowards (curMusic.pitch, targetPitch, 0.005f * changeSpeed);
 		lowpass.cutoffFrequency = Mathf.MoveTowards (lowpass.cutoffFrequency, targetLowpass, 750f * changeSpeed);

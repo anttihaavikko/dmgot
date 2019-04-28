@@ -18,6 +18,7 @@ public class Farmer : MonoBehaviour
     public Fruit tableFruit;
     public EffectCamera cam;
     public Transform bleedPoint;
+    public Transform mouth;
 
     private Vector3 pos;
     private bool locked;
@@ -62,6 +63,11 @@ public class Farmer : MonoBehaviour
         {
             bubble.ShowMessage("This is a test (message) that is (there) or something!");
         }
+
+        if (Application.isEditor && Input.GetKeyDown(KeyCode.E))
+        {
+            Manager.Instance.cash += 10;
+        }
     }
 
     private void ShowHelpAfterDim()
@@ -98,6 +104,10 @@ public class Farmer : MonoBehaviour
         pos = target;
 
         if (Mathf.Abs(dx) > 0f || Mathf.Abs(dy) > 0f) {
+
+            AudioManager.Instance.PlayEffectAt(26, transform.position, 0.5f);
+            AudioManager.Instance.PlayEffectAt(1, transform.position, 0.75f);
+            AudioManager.Instance.PlayEffectAt(6, transform.position, 0.25f);
 
             CancelInvoke("ShowHelpAfterDim");
 
@@ -148,11 +158,25 @@ public class Farmer : MonoBehaviour
             if (tileType == Tile.DEAD)
             {
                 field.fertilizers++;
+
+                AudioManager.Instance.PlayEffectAt(0, transform.position, 1f);
+                AudioManager.Instance.PlayEffectAt(14, transform.position, 1f);
+                AudioManager.Instance.PlayEffectAt(11, transform.position, 1f);
+                AudioManager.Instance.PlayEffectAt(20, transform.position, 1f);
             }
 
             if(tileType == Tile.FRUIT)
             {
                 Manager.Instance.cash += 5;
+
+                AudioManager.Instance.PlayEffectAt(20, transform.position, 1f);
+                AudioManager.Instance.PlayEffectAt(27, transform.position, 1f);
+                AudioManager.Instance.PlayEffectAt(2, transform.position, 1f);
+            }
+
+            if(tileType == Tile.NONE)
+            {
+                PlantSound();
             }
 
             if (tileType == Tile.GRASS)
@@ -176,6 +200,13 @@ public class Farmer : MonoBehaviour
         }
     }
 
+    void PlantSound()
+    {
+        AudioManager.Instance.PlayEffectAt(0, transform.position, 1f);
+        AudioManager.Instance.PlayEffectAt(6, transform.position, 1f);
+        AudioManager.Instance.PlayEffectAt(11, transform.position, 1f);
+    }
+
     public void DoInteract()
     {
         field.Interact(pos);
@@ -188,10 +219,20 @@ public class Farmer : MonoBehaviour
 
     public void ChangeScene(string scene)
     {
+        Invoke("DoorSound", 0.25f);
+        Invoke("DoorSound", 0.75f);
+        AudioManager.Instance.PlayEffectAt(14, transform.position, 0.5f);
+        AudioManager.Instance.PlayEffectAt(15, transform.position, 0.5f);
+
         field.SaveGrid();
         dimmer.Close();
         sceneToSwitch = scene;
         Invoke("DoChangeScene", Dimmer.speed);
+    }
+
+    void DoorSound()
+    {
+        AudioManager.Instance.PlayEffectAt(13, transform.position, 1.5f);
     }
 
     void DoChangeScene()
@@ -201,6 +242,7 @@ public class Farmer : MonoBehaviour
 
     public void Sleep()
     {
+        AudioManager.Instance.Highpass(true);
         Manager.Instance.day++;
         Manager.Instance.didSleep = true;
         dimmer.Close();
@@ -218,6 +260,8 @@ public class Farmer : MonoBehaviour
 
     void OpenDimmer()
     {
+        AudioManager.Instance.Highpass(false);
+
         if (tableFruit)
             tableFruit.Show();
 
@@ -232,6 +276,12 @@ public class Farmer : MonoBehaviour
         cam.BaseEffect(Manager.Instance.cuts * 1f);
 
         EffectManager.Instance.AddEffect(0, bleedPoint.position);
+
+        AudioManager.Instance.PlayEffectAt(0, transform.position, 0.5f);
+        AudioManager.Instance.PlayEffectAt(23, transform.position, 0.5f);
+        AudioManager.Instance.PlayEffectAt(2, transform.position, 0.5f);
+
+        Invoke("PlantSound", 0.8f);
     }
 
     public void UpdateSaturation()
@@ -247,14 +297,28 @@ public class Farmer : MonoBehaviour
         {
             bubble.ShowMessage("Unfortunately, there is (nothing) to eat.");
         }
-
-        if (tableFruit && Manager.Instance.cash > 0)
+        else
         {
-            Manager.Instance.cash--;
-            Manager.Instance.hasEaten = true;
-            ResetTriggers();
-            anim.SetTrigger("Act");
-            tableFruit.gameObject.SetActive(false);
+            if (Manager.Instance.cash > 0)
+            {
+                Manager.Instance.cash--;
+                Manager.Instance.hasEaten = true;
+                ResetTriggers();
+                anim.SetTrigger("Eat");
+                tableFruit.gameObject.SetActive(false);
+
+                AudioManager.Instance.PlayEffectAt(25, mouth.position, 1f);
+                AudioManager.Instance.PlayEffectAt(26, mouth.position, 1f);
+                AudioManager.Instance.PlayEffectAt(27, mouth.position, 1f);
+            }
         }
+    }
+
+    public void EatEffect()
+    {
+        EffectManager.Instance.AddEffect(0, mouth.position + Vector3.back);
+
+        AudioManager.Instance.PlayEffectAt(14, mouth.position, 1f);
+        AudioManager.Instance.PlayEffectAt(16, mouth.position, 0.6f);
     }
 }

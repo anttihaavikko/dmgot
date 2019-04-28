@@ -14,4 +14,9 @@ public class FarmerAnim : MonoBehaviour
     {
         farmer.Bleed();
     }
+
+    public void Eat()
+    {
+        farmer.EatEffect();
+    }
 }

@@ -88,7 +88,7 @@ public class SpeechBubble : MonoBehaviour {
 			transform.localScale = Vector3.MoveTowards (transform.localScale, hiddenSize, Time.deltaTime * 5f);
 		}
 
-		if (Random.value < 0.2f) {
+		if (Random.value < 0.1f) {
 			return;
 		}
 
@@ -109,8 +109,9 @@ public class SpeechBubble : MonoBehaviour {
 			string letter = message.Substring (messagePos - 1, 1);
 
 			if (messagePos == 1 || letter == " ") {
-                //AudioManager.Instance.PlayEffectAt(14, Vector3.zero, 0.5f);
-			}
+                AudioManager.Instance.PlayEffectAt(25, transform.position, 0.5f);
+                AudioManager.Instance.PlayEffectAt(1, transform.position, 0.75f);
+            }
 
 			if (messagePos >= message.Length) {
 				messagePos = -1;
@@ -134,7 +135,8 @@ public class SpeechBubble : MonoBehaviour {
         canSkip = false;
         Invoke("EnableSkip", 0.25f);
 
-        //AudioManager.Instance.PlayEffectAt (13, Vector3.zero, 0.5f);
+        AudioManager.Instance.PlayEffectAt(9, transform.position, 1f);
+        AudioManager.Instance.PlayEffectAt(27, transform.position, 0.7f);
 
         useColors = colors;
 
@@ -180,12 +182,13 @@ public class SpeechBubble : MonoBehaviour {
 
 	public void Hide() {
 
-        //AudioManager.Instance.PlayEffectAt(13, Vector3.zero, 0.3f);
+
         //AudioManager.Instance.Highpass (false);
 
-//		AudioManager.Instance.PlayEffectAt (8, transform.position, 0.4f);
+        AudioManager.Instance.PlayEffectAt (9, transform.position, 1f);
+        AudioManager.Instance.PlayEffectAt(27, transform.position, 0.7f);
 
-		if (closeClip) {
+        if (closeClip) {
 			audioSource.PlayOneShot (closeClip, 1f);
 		}
 
