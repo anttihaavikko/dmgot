@@ -12,5 +12,5 @@ butler push Builds/win anttihaavikko/dmgot:win --fix-permissions
 echo "${COLOR}Pushing build for Linux${NC}"
 butler push Builds/linux anttihaavikko/dmgot:linux
 
-#echo "${COLOR}Pushing build for HTML5${NC}"
-#butler push Builds/html5 anttihaavikko/tic-tac-matrix:html5
+echo "${COLOR}Pushing build for HTML5${NC}"
+butler push Builds/html5 anttihaavikko/dmgot:html5
