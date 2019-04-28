@@ -27,6 +27,9 @@ public class Manager : MonoBehaviour {
 
     public bool menuing = false;
 
+    public List<string> messages;
+    public bool mailAdded = false;
+
     private static Manager instance = null;
 	public static Manager Instance {
 		get { return instance; }
@@ -41,7 +44,9 @@ public class Manager : MonoBehaviour {
             grid = new int[Field.GRIDSIZE * Field.GRIDSIZE];
             DontDestroyOnLoad(instance.gameObject);
         }
-	}
+
+        messages = new List<string>();
+    }
 
     public void Redo()
     {
@@ -58,5 +63,8 @@ public class Manager : MonoBehaviour {
         hasSeenFruit = false;
         hasSeenHalf = true;
         hasSeenIntro = false;
+        mailAdded = false;
+
+        messages.Clear();
     }
 }

@@ -45,7 +45,26 @@ public class Farmer : MonoBehaviour
             Invoke("ShowHelpAfterDim", Dimmer.speed);
         }
 
+        if(!isOutside)
+        {
+            AddMails();
+        }
+
         pos = transform.position;
+    }
+
+    void AddMails()
+    {
+        if (Manager.Instance.day == 1 && !Manager.Instance.mailAdded)
+        {
+            Manager.Instance.messages.Add("(FROM): lndlrd@house.com\n(Subject): Rent overdue!|I still haven't recieved your rent!|You have (two weeks) to cough up the ($" + Manager.goalCash + ")");
+        }
+
+        if (Manager.Instance.day == 2 && !Manager.Instance.mailAdded)
+        {
+            Manager.Instance.messages.Add("(FROM): pov@ldjam.com\n(Subject): Dude|Lol, look at this funny cat pic!\n(-)Mike|[(ATTACHMENT MISSING)]");
+            Manager.Instance.messages.Add("(FROM): pov@ldjam.com\n(Subject): Re: Dude|Here is the attachment...\n(-)Mike|[(CAT PIC)]");
+        }
     }
 
     void ShowMoveHelp()
@@ -281,6 +300,8 @@ public class Farmer : MonoBehaviour
         }
 
         Manager.Instance.hasEaten = false;
+        Manager.Instance.mailAdded = false;
+        AddMails();
     }
 
     void GoEnd()

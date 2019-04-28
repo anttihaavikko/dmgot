@@ -41,6 +41,12 @@ public class TheEnd : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S)) y = -1;
         if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) y = 1;
 
+        if(Mathf.Abs(y) > 0)
+        {
+            AudioManager.Instance.PlayEffectAt(25, Vector3.zero, 0.5f);
+            AudioManager.Instance.PlayEffectAt(1, Vector3.zero, 0.75f);
+        }
+
         selected = (selected + y) % 2;
 
         if(selected == 0)

@@ -38,6 +38,8 @@ public class SpeechBubble : MonoBehaviour {
     private string[] optionActions;
     private int optionSelection;
 
+
+
     // Use this for initialization
     void Awake () {
 		textArea.text = "";
@@ -50,7 +52,7 @@ public class SpeechBubble : MonoBehaviour {
         SetColor(hiliteColor);
 
         Invoke("EnableSkip", 0.25f);
-	}
+    }
 
     void ShowHelp()
     {
@@ -74,7 +76,34 @@ public class SpeechBubble : MonoBehaviour {
 
     void ShowMail()
     {
-        ShowMessage("Mail etc etc");
+        Manager.Instance.mailAdded = true;
+
+        if (Manager.Instance.messages.Count == 0)
+        {
+            ShowMessage("No new messages.");
+        }
+        else
+        {
+            if (Manager.Instance.messages.Count > 1)
+                QueMessage("You have (" + Manager.Instance.messages.Count + ") new messages!");
+            else
+                QueMessage("You have (" + Manager.Instance.messages.Count + ") new message!");
+
+            for (int i = 0; i < Manager.Instance.messages.Count; i++)
+            {
+                if(Manager.Instance.messages.Count > 1)
+                {
+                    QueMessage("Message " + (i + 1));
+                }
+                var sections = Manager.Instance.messages[i].Split('|');
+                foreach(var s in sections)
+                    QueMessage(s);
+            }
+
+            Manager.Instance.messages.Clear();
+        }
+
+        CheckQueuedMessages();
     }
 
     void ShowShop()
@@ -96,6 +125,12 @@ public class SpeechBubble : MonoBehaviour {
 
             if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S)) y = 1;
             if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) y = -1;
+
+            if(Mathf.Abs(y) > 0)
+            {
+                AudioManager.Instance.PlayEffectAt(25, transform.position, 0.5f);
+                AudioManager.Instance.PlayEffectAt(1, transform.position, 0.75f);
+            }
 
             optionSelection = (optionSelection + y) % options.Length;
             if (optionSelection == -1)
