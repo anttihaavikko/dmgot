@@ -8,6 +8,8 @@ public class SpeechBubble : MonoBehaviour {
 
 	public TextMeshPro textArea;
     public Transform helpIcon;
+    public SpriteRenderer helpImage;
+    public Sprite[] helpSprites;
 
 	private Vector3 hiddenSize = Vector3.zero;
 	private Vector3 shownSize;
@@ -15,8 +17,9 @@ public class SpeechBubble : MonoBehaviour {
 	private bool shown;
 	private string message = "";
 	private int messagePos = -1;
+    private bool hidesWithAny = false;
 
-	public bool done = false;
+    public bool done = false;
 
 	private AudioSource audioSource;
 	public AudioClip closeClip;
@@ -66,7 +69,7 @@ public class SpeechBubble : MonoBehaviour {
         if (Input.GetButtonUp("Interact"))
             EnableSkip();
 
-		if (shown && Input.GetButtonDown("Interact") && canSkip) {
+		if (shown && (Input.GetButtonDown("Interact") || (hidesWithAny && Input.anyKeyDown)) && canSkip) {
             HideHelp();
 
 			if (!done) {
@@ -132,11 +135,26 @@ public class SpeechBubble : MonoBehaviour {
 	}
 
 	public void ShowMessage(string str, bool colors = true) {
+        hidesWithAny = false;
+        helpImage.transform.localScale = Vector3.zero;
         canSkip = false;
         Invoke("EnableSkip", 0.25f);
 
         AudioManager.Instance.PlayEffectAt(9, transform.position, 1f);
         AudioManager.Instance.PlayEffectAt(27, transform.position, 0.7f);
+
+        if(str.Contains("[IMAGE1]"))
+        {
+            hidesWithAny = true;
+            str = " ";
+            helpImage.sprite = helpSprites[0];
+            Tweener.Instance.ScaleTo(helpImage.transform, Vector3.one, 0.3f, 0f, TweenEasings.BounceEaseOut);
+            HideHelp();
+        }
+        else
+        {
+            Invoke("ShowHelp", 2f);
+        }
 
         useColors = colors;
 
@@ -152,8 +170,6 @@ public class SpeechBubble : MonoBehaviour {
 		textArea.text = "";
 
 		Invoke ("ShowText", 0.2f);
-
-        Invoke("ShowHelp", 2f);
 	}
 
 	public void QueMessage(string str) {

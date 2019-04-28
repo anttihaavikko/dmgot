@@ -37,6 +37,8 @@ public class Farmer : MonoBehaviour
         {
             transform.position = Vector3.zero;
             Manager.Instance.justStarted = false;
+
+            Invoke("ShowMoveHelp", 2f);
         }
         else
         {
@@ -44,6 +46,11 @@ public class Farmer : MonoBehaviour
         }
 
         pos = transform.position;
+    }
+
+    void ShowMoveHelp()
+    {
+        bubble.ShowMessage("[IMAGE1]");
     }
 
     // Update is called once per frame
@@ -110,6 +117,7 @@ public class Farmer : MonoBehaviour
             AudioManager.Instance.PlayEffectAt(6, transform.position, 0.25f);
 
             CancelInvoke("ShowHelpAfterDim");
+            CancelInvoke("ShowMoveHelp");
 
             Tweener.Instance.MoveTo(transform, pos, 0.07f, 0f, TweenEasings.BounceEaseOut);
 
