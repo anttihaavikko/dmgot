@@ -153,6 +153,7 @@
     <Compile Include="Assets\Scripts\Mover.cs" />
     <Compile Include="Assets\Scripts\OptionsView.cs" />
     <Compile Include="Assets\Scripts\Pulsate.cs" />
+    <Compile Include="Assets\Scripts\RandomizeRotation.cs" />
     <Compile Include="Assets\Scripts\Rotator.cs" />
     <Compile Include="Assets\Scripts\Shine.cs" />
     <Compile Include="Assets\Scripts\SoundEffect.cs" />

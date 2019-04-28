@@ -237,6 +237,8 @@ public class Farmer : MonoBehaviour
                 anim.SetTrigger("Cut");
                 locked = true;
                 Invoke("Unlock", 1.5f);
+                EffectManager.Instance.AddEffect(2, transform.position + Vector3.up * 0.3f);
+                EffectManager.Instance.AddEffect(3, transform.position + Vector3.up * 0.3f);
             }
             else
             {
@@ -245,6 +247,7 @@ public class Farmer : MonoBehaviour
                 locked = true;
                 Invoke("Unlock", 0.15f);
                 EffectManager.Instance.AddEffect(2, transform.position + Vector3.up * 0.3f);
+                //EffectManager.Instance.AddEffect(3, transform.position + Vector3.up * 0.3f);
             }
         }
 
@@ -259,6 +262,7 @@ public class Farmer : MonoBehaviour
         AudioManager.Instance.PlayEffectAt(0, transform.position, 1f);
         AudioManager.Instance.PlayEffectAt(6, transform.position, 1f);
         AudioManager.Instance.PlayEffectAt(11, transform.position, 1f);
+        EffectManager.Instance.AddEffect(3, transform.position + Vector3.up * 0.3f);
     }
 
     public void DoInteract()

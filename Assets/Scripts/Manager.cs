@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Manager : MonoBehaviour {
 
-    public const int goalCash = 240;
+    public const int goalCash = 300;
 
     public int[] grid;
     public bool justStarted = true;
