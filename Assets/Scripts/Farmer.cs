@@ -55,21 +55,23 @@ public class Farmer : MonoBehaviour
 
     void AddMails()
     {
-        if (Manager.Instance.day == 1 && !Manager.Instance.mailAdded)
+        if (Manager.Instance.day == 1 && Manager.Instance.mailForDayAdded < Manager.Instance.day)
         {
             Manager.Instance.messages.Add("(FROM): lndlrd@house.com\n(Subject): Rent overdue!|I still haven't recieved your rent!|You have (two weeks) to cough up the ($" + Manager.goalCash + ")");
         }
 
-        if (Manager.Instance.day == 2 && !Manager.Instance.mailAdded)
+        if (Manager.Instance.day == 2 && Manager.Instance.mailForDayAdded < Manager.Instance.day)
         {
             Manager.Instance.messages.Add("(FROM): pov@ldjam.com\n(Subject): Dude|Lol, look at this funny cat pic!\n(-)Mike|[(ATTACHMENT MISSING)]");
             Manager.Instance.messages.Add("(FROM): pov@ldjam.com\n(Subject): Re: Dude|Here is the attachment...\n(-)Mike|[IMAGE2]");
         }
 
-        if (Manager.Instance.day == 5 && !Manager.Instance.mailAdded)
+        if (Manager.Instance.day == 5 && Manager.Instance.mailForDayAdded < Manager.Instance.day)
         {
             Manager.Instance.messages.Add("(FROM): me@prince.ngr\n(Subject): The oprortunity|Hello my frend!|I have inhorited the throne and fnuds of my late frather.|Only thing missing, is the bale money to unfreeze the 100 millison dolars.|This is where I ned your help.|If you helps me pay the bali of 2 thousand dollar, I can give you 1% of the 100 millions.|Hope to here from you soon.|P.S. No toasters!");
         }
+
+        Manager.Instance.mailForDayAdded = Manager.Instance.day;
     }
 
     void ShowMoveHelp()
@@ -283,8 +285,8 @@ public class Farmer : MonoBehaviour
 
         if(Manager.Instance.cuts >= 5)
         {
-            Manager.Instance.endTextOne = "But he never woke up";
-            Manager.Instance.endTextTwo = "Due to losing too much blood";
+            Manager.Instance.endTextOne = "But he (never woke) up";
+            Manager.Instance.endTextTwo = "Due to losing too much (blood)";
             Invoke("GoEnd", 2f);
             return;
         }
@@ -308,7 +310,6 @@ public class Farmer : MonoBehaviour
         }
 
         Manager.Instance.hasEaten = false;
-        Manager.Instance.mailAdded = false;
         AddMails();
     }
 

@@ -76,8 +76,6 @@ public class SpeechBubble : MonoBehaviour {
 
     void ShowMail()
     {
-        Manager.Instance.mailAdded = true;
-
         if (Manager.Instance.messages.Count == 0)
         {
             ShowMessage("No new messages.");
@@ -108,12 +106,56 @@ public class SpeechBubble : MonoBehaviour {
 
     void ShowShop()
     {
-        ShowMessage("Shop etc etc");
+        QueMessage("What would you like to buy?");
+        QueMessage("[SHOP]");
+        CheckQueuedMessages();
     }
 
     void ShowBrowse()
     {
         ShowMessage("Browsing");
+    }
+
+    void Fertilizer1()
+    {
+        if(Manager.Instance.cash >= 1)
+        {
+            ShowMessage("Bought (1) fertilizer!");
+            Manager.Instance.cash -= 1;
+            Manager.Instance.fertilizers += 1;
+        }
+        else
+        {
+            ShowMessage("Insufficient funds!");
+        }
+    }
+
+    void Fertilizer5()
+    {
+        if (Manager.Instance.cash >= 3)
+        {
+            ShowMessage("Bought (5) fertilizers!");
+            Manager.Instance.cash -= 3;
+            Manager.Instance.fertilizers += 5;
+        }
+        else
+        {
+            ShowMessage("Insufficient funds!");
+        }
+    }
+
+    void Fertilizer10()
+    {
+        if (Manager.Instance.cash >= 5)
+        {
+            ShowMessage("Bought (10) fertilizers!");
+            Manager.Instance.cash -= 5;
+            Manager.Instance.fertilizers += 10;
+        }
+        else
+        {
+            ShowMessage("Insufficient funds!");
+        }
     }
 
     // Update is called once per frame
@@ -277,6 +319,22 @@ public class SpeechBubble : MonoBehaviour {
             CancelInvoke("ShowHelp");
             string[] opts = { "Bank", "Mail", "Browse", "Shop", "Nothing" };
             string[] optActs = { "ShowBank", "ShowMail", "ShowBrowse", "ShowShop", "Hide" };
+            optionSelection = 0;
+            options = opts;
+            optionActions = optActs;
+            SkipMessage();
+            UpdateMenu();
+            HideHelp();
+        }
+
+        if (str.Contains("[SHOP]"))
+        {
+            HideHelp();
+            Manager.Instance.menuing = true;
+            CancelInvoke("ShowText");
+            CancelInvoke("ShowHelp");
+            string[] opts = { "1 Fertilizer / ($1)", "5 Fertilizers / ($3)", "10 fertilizers / ($5)", "Nothing" };
+            string[] optActs = { "Fertilizer1", "Fertilizer5", "Fertilizer10", "Hide" };
             optionSelection = 0;
             options = opts;
             optionActions = optActs;

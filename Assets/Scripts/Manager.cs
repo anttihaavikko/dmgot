@@ -28,7 +28,7 @@ public class Manager : MonoBehaviour {
     public bool menuing = false;
 
     public List<string> messages;
-    public bool mailAdded = false;
+    public int mailForDayAdded = 0;
 
     private static Manager instance = null;
 	public static Manager Instance {
@@ -63,7 +63,7 @@ public class Manager : MonoBehaviour {
         hasSeenFruit = false;
         hasSeenHalf = true;
         hasSeenIntro = false;
-        mailAdded = false;
+        mailForDayAdded = 0;
 
         messages.Clear();
     }
