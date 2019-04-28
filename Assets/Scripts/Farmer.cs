@@ -370,6 +370,19 @@ public class Farmer : MonoBehaviour
         AudioManager.Instance.PlayEffectAt(2, transform.position, 0.5f);
 
         Invoke("PlantSound", 0.8f);
+
+        if((Manager.Instance.cuts == 4 && !Manager.Instance.hasSeenFourCuts))
+        {
+            Invoke("FourCutsMessage", 0.5f);
+        }
+    }
+
+    void FourCutsMessage()
+    {
+        Manager.Instance.hasSeenFourCuts = true;
+        bubble.QueMessage("Ugh, I'm not (feeling too good).");
+        bubble.QueMessage("I (better) go catch some (sleep).");
+        bubble.CheckQueuedMessages();
     }
 
     public void UpdateSaturation()
@@ -389,6 +402,7 @@ public class Farmer : MonoBehaviour
         {
             if (Manager.Instance.cash > 0)
             {
+                Manager.Instance.daysWithoutEating = 0;
                 Manager.Instance.cash--;
                 Manager.Instance.hasEaten = true;
                 ResetTriggers();

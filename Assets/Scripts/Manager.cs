@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Manager : MonoBehaviour {
 
-    public const int goalCash = 225;
+    public const int goalCash = 240;
 
     public int[] grid;
     public bool justStarted = true;
@@ -25,6 +25,7 @@ public class Manager : MonoBehaviour {
     public bool hasSeenFruit = false;
     public bool hasSeenHalf = false;
     public bool hasSeenIntro = false;
+    public bool hasSeenFourCuts = false;
 
     public bool menuing = false;
 
@@ -65,6 +66,7 @@ public class Manager : MonoBehaviour {
         hasSeenFruit = false;
         hasSeenHalf = true;
         hasSeenIntro = false;
+        hasSeenFourCuts = false;
         mailForDayAdded = 0;
 
         messages.Clear();
