@@ -21,10 +21,15 @@ public class Tile : MonoBehaviour
     public const int FRUIT = 5;
     public const int DEAD = 6;
 
+    private Vector3 fertScale, plantedScale;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        fertScale = fertilizer.transform.localScale;
+        plantedScale = planted.transform.localScale;
+        //fertilizer.transform.localScale = Vector3.zero;
+        //planted.transform.localScale = Vector3.zero;
     }
 
     // Update is called once per frame
@@ -73,6 +78,9 @@ public class Tile : MonoBehaviour
         plant.SetActive(type >= PLANT);
         fruit.SetActive(type == FRUIT);
         planted.SetActive(type == PLANTED);
+
+        //Tweener.Instance.ScaleTo(fertilizer.transform, fertScale, 0.3f, 0f, TweenEasings.BounceEaseOut);
+        //Tweener.Instance.ScaleTo(planted.transform, plantedScale, 0.3f, 0f, TweenEasings.BounceEaseOut);
     }
 
     private void Randomize()
