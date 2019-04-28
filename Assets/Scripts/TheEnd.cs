@@ -77,6 +77,7 @@ public class TheEnd : MonoBehaviour
 
     void TryAgain()
     {
+        AudioManager.Instance.Highpass(false);
         Manager.Instance.Redo();
         SceneManager.LoadSceneAsync("Hut");
     }

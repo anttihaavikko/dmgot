@@ -115,18 +115,18 @@ public class SpeechBubble : MonoBehaviour {
         string[] websites = {
             "(bloodfruitfarmers.org)\n--------------------------\n(anonymous) posted...|(Hot) tip!|(Eating) before going to (bed) makes your (blood) level stabilize better.",
             "Error (404)\n\nFile not found!",
-            "(bloodfruitfarmers.org)\n--------------------------\n(conway) posted...|(There is something off about these plants.|I think I have to complain to the (B3/S23) committee...",
-            "Day 4 message",
-            "Day 5 message",
-            "Day 6 message",
-            "Day 7 message",
-            "Day 8 message",
-            "Day 9 message",
-            "Day 10 message",
-            "Day 11 message",
-            "Day 12 message",
-            "Day 13 message",
-            "Day 14 message"
+            "(bloodfruitfarmers.org)\n--------------------------\n(conway) posted...|There is something (off) about these (plants).|I think I have to complain to the (B3/S23) committee...",
+            "(webmd.com)\n--------------------------\n(breaking news)\n(Five) plantations worth of (blood loss) is enough to (kill) a man.|Any (more) than that you you start (seeing colors).",
+            "Error (500)\n\nInternal Server Error",
+            "(webmd.com)\n--------------------------\n(breaking news)\nHuman can (only) go foraround a (week without any food).|Don't be a (tool), (feed) yourself!",
+            "(bloodfruitfarmers.org)\n--------------------------\n(admin) posted...|Fruit (price) skyrockets!|The (blood fruit) are currently going on a crazy price of ($5) per fruit.|Now is the (time to sell) if you've been hoarding them!",
+            "Please (update) and (restart) your browser...",
+            "isitchristmas.com\n--------------------------\n(NO)",
+            "(news.com)\n--------------------------\n(Science discovery)|There has been new (research) done on the (Blood Fruit) juice.|Some (scientist) believe that it is (highly addictive) and even (harmful) to the human body.",
+            "isitchristmas.com\n--------------------------\n(YES)",
+            "(news.com)\n--------------------------\n(Celebrity divorce)|The famous country singer duo (Sam & Sally) are getting divorced.|The reason behind this is most likely (Sam's) misuse of (Blood Fruit) juice.",
+            "(ldjam.com)\n--------------------------\n(@pov) posted|It's almost time for the (Ludum Dare 44).|Are you ready? The theme is (Your life is currency).",
+            "(news.com)\n--------------------------\n(Divorce backlash)|The famous country singer duo (Sam & Sally) were having some marital problems.|(Sally) threatened to get (a divorce) if (Sam) didn't stop his (Blood Fruit) juice snorting habits.|Yesterday (morning), the pair was (found dead) at their apartment.|It is suspected that (Sam) killed his wife in a bad (Blood Fruit) juice trip...|...and then (followed) it by (killing himself).",
         };
 
         var sections = websites[Manager.Instance.day - 1].Split('|');

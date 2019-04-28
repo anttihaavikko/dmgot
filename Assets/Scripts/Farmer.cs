@@ -315,7 +315,7 @@ public class Farmer : MonoBehaviour
         if (Manager.Instance.day > 14)
         {
             Manager.Instance.endTextOne = "The (two weeks) is done";
-            Manager.Instance.endTextTwo = Manager.Instance.cash > 200 ? "And he earned enough for the rent, (congratulations)!" : "But he didn't earn enough for the rent...";
+            Manager.Instance.endTextTwo = Manager.Instance.cash > Manager.goalCash ? "And he earned enough for the rent, (congratulations)!" : "But he didn't earn enough for the rent...";
             Invoke("GoEnd", 2f);
             return;
         }
@@ -415,7 +415,7 @@ public class Farmer : MonoBehaviour
         if (Manager.Instance.day >= 8 && !Manager.Instance.hasSeenHalf)
         {
             Manager.Instance.hasSeenHalf = true;
-            bubble.QueMessage("Uh oh, first the first week is gone already...");
+            bubble.QueMessage("Uh oh, first the (first week) is gone already...");
             bubble.QueMessage("...and I'm still missing ($" + (Manager.goalCash - Manager.Instance.cash) + ") from my rent money.");
         }
 

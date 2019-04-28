@@ -28,7 +28,7 @@ public class Field : MonoBehaviour
         if (!Manager.Instance.hasSeenIntro)
         {
             Manager.Instance.hasSeenIntro = true;
-            bubble.QueMessage("Hmm, I better start farming...");
+            bubble.QueMessage("Hmm, I better start (farming)...");
             bubble.QueMessage("Then I can (sell the crop) for profit.");
             bubble.QueMessage("And then hopefully I can earn the ($" + Manager.goalCash + ") rent money.");
             bubble.CheckQueuedMessages();
