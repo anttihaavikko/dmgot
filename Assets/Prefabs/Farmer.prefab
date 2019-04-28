@@ -393,6 +393,7 @@ MonoBehaviour:
   helpImage: {fileID: 4651891667354259414}
   helpSprites:
   - {fileID: 21300000, guid: 4a6c92f08717d4e61aebf90a50d41fa5, type: 3}
+  - {fileID: 21300000, guid: fca5c8d4acf004f3c87a9c2a2fdc5ade, type: 3}
   done: 0
   closeClip: {fileID: 0}
   clickHelp: {fileID: 0}

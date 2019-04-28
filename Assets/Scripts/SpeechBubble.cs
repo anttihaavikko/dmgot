@@ -71,7 +71,7 @@ public class SpeechBubble : MonoBehaviour {
 
     void ShowBank()
     {
-        ShowMessage("My balance: ($" + Manager.Instance.cash + ")\nFertilizers in stock: " + Manager.Instance.fertilizers);
+        ShowMessage("My balance: ($" + Manager.Instance.cash + ")\nFertilizers in stock: (" + Manager.Instance.fertilizers + ")");
     }
 
     void ShowMail()
@@ -238,11 +238,14 @@ public class SpeechBubble : MonoBehaviour {
         AudioManager.Instance.PlayEffectAt(9, transform.position, 1f);
         AudioManager.Instance.PlayEffectAt(27, transform.position, 0.7f);
 
-        if (str.Contains("[IMAGE1]"))
+        if (str.Contains("[IMAGE"))
         {
-            hidesWithAny = true;
+            var idx = int.Parse(str.Substring(6, 1)) - 1;
+            if(str.Contains("[IMAGE1]")) {
+                hidesWithAny = true;
+            }
             str = " ";
-            helpImage.sprite = helpSprites[0];
+            helpImage.sprite = helpSprites[idx];
             Tweener.Instance.ScaleTo(helpImage.transform, Vector3.one, 0.3f, 0f, TweenEasings.BounceEaseOut);
             HideHelp();
         }

@@ -63,7 +63,12 @@ public class Farmer : MonoBehaviour
         if (Manager.Instance.day == 2 && !Manager.Instance.mailAdded)
         {
             Manager.Instance.messages.Add("(FROM): pov@ldjam.com\n(Subject): Dude|Lol, look at this funny cat pic!\n(-)Mike|[(ATTACHMENT MISSING)]");
-            Manager.Instance.messages.Add("(FROM): pov@ldjam.com\n(Subject): Re: Dude|Here is the attachment...\n(-)Mike|[(CAT PIC)]");
+            Manager.Instance.messages.Add("(FROM): pov@ldjam.com\n(Subject): Re: Dude|Here is the attachment...\n(-)Mike|[IMAGE2]");
+        }
+
+        if (Manager.Instance.day == 5 && !Manager.Instance.mailAdded)
+        {
+            Manager.Instance.messages.Add("(FROM): me@prince.ngr\n(Subject): The oprortunity|Hello my frend!|I have inhorited the throne and fnuds of my late frather.|Only thing missing, is the bale money to unfreeze the 100 millison dolars.|This is where I ned your help.|If you helps me pay the bali of 2 thousand dollar, I can give you 1% of the 100 millions.|Hope to here from you soon.|P.S. No toasters!");
         }
     }
 
@@ -269,6 +274,8 @@ public class Farmer : MonoBehaviour
 
     public void Sleep()
     {
+        locked = true;
+
         AudioManager.Instance.Highpass(true);
         Manager.Instance.day++;
         Manager.Instance.didSleep = true;
@@ -292,6 +299,7 @@ public class Farmer : MonoBehaviour
 
         mid.Show("DAY " + Manager.Instance.day, "$" + Manager.Instance.cash);
         Invoke("OpenDimmer", 4f);
+        Invoke("Unlock", 4f);
 
         if (Manager.Instance.hasEaten && Manager.Instance.cuts < 5)
         {
