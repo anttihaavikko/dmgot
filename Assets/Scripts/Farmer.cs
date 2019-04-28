@@ -71,6 +71,19 @@ public class Farmer : MonoBehaviour
             Manager.Instance.messages.Add("(FROM): me@prince.ngr\n(Subject): The oprortunity|Hello my frend!|I have inhorited the throne and fnuds of my late frather.|Only thing missing, is the bale money to unfreeze the 100 millison dolars.|This is where I ned your help.|If you helps me pay the bali of 2 thousand dollar, I can give you 1% of the 100 millions.|Hope to here from you soon.|P.S. No toasters!");
         }
 
+        if (Manager.Instance.day == 8 && Manager.Instance.mailForDayAdded < Manager.Instance.day)
+        {
+            Manager.Instance.messages.Add("(FROM): robot@ebay.com\n(Subject): Item not sold|The (baseball card) you were selling did did not recieve any bids.|This is an (autometed message), please do not reply.");
+        }
+
+        if (Manager.Instance.day == 11 && Manager.Instance.mailForDayAdded < Manager.Instance.day)
+        {
+            Manager.Instance.messages.Add("(FROM): your@dad.com\n(Subject): [NO SUBJECT]|Please (call me), we need to talk.");
+            Manager.Instance.messages.Add("(FROM): your@dad.com\n(Subject): [NO SUBJECT]|Please (call me), we need to talk.");
+            Manager.Instance.messages.Add("(FROM): your@dad.com\n(Subject): [NO SUBJECT]|Sorry, I (sent that twice). I still can't (figure out) this e-mail stuff.");
+            Manager.Instance.messages.Add("(FROM): your@mom.com\n(Subject): Hi dear!|I didn't want to tell this (over e-mail) but...|Me and your (father) are getting (divorced).|(XOXO) MOM");
+        }
+
         Manager.Instance.mailForDayAdded = Manager.Instance.day;
     }
 
@@ -291,6 +304,14 @@ public class Farmer : MonoBehaviour
             return;
         }
 
+        if(Manager.Instance.daysWithoutEating >= 7)
+        {
+            Manager.Instance.endTextOne = "But he (never woke) up";
+            Manager.Instance.endTextTwo = "Due to (lack of nourishment)";
+            Invoke("GoEnd", 2f);
+            return;
+        }
+
         if (Manager.Instance.day > 14)
         {
             Manager.Instance.endTextOne = "The (two weeks) is done";
@@ -305,8 +326,13 @@ public class Farmer : MonoBehaviour
 
         if (Manager.Instance.hasEaten && Manager.Instance.cuts < 5)
         {
+            Manager.Instance.daysWithoutEating = 0;
             Manager.Instance.cuts = 0;
             Invoke("UpdateSaturation", 4f);
+        }
+        else
+        {
+            Manager.Instance.daysWithoutEating++;
         }
 
         Manager.Instance.hasEaten = false;

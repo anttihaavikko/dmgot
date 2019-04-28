@@ -39,7 +39,6 @@ public class SpeechBubble : MonoBehaviour {
     private int optionSelection;
 
 
-
     // Use this for initialization
     void Awake () {
 		textArea.text = "";
@@ -78,7 +77,7 @@ public class SpeechBubble : MonoBehaviour {
     {
         if (Manager.Instance.messages.Count == 0)
         {
-            ShowMessage("No new messages.");
+            ShowMessage("No (new) messages.");
         }
         else
         {
@@ -91,7 +90,7 @@ public class SpeechBubble : MonoBehaviour {
             {
                 if(Manager.Instance.messages.Count > 1)
                 {
-                    QueMessage("Message " + (i + 1));
+                    QueMessage("Message (" + (i + 1) + ")");
                 }
                 var sections = Manager.Instance.messages[i].Split('|');
                 foreach(var s in sections)
@@ -113,7 +112,28 @@ public class SpeechBubble : MonoBehaviour {
 
     void ShowBrowse()
     {
-        ShowMessage("Browsing");
+        string[] websites = {
+            "(bloodfruitfarmers.org)\n--------------------------\n(anonymous) posted...|(Hot) tip!|(Eating) before going to (bed) makes your (blood) level stabilize better.",
+            "Error (404)\n\nFile not found!",
+            "(bloodfruitfarmers.org)\n--------------------------\n(conway) posted...|(There is something off about these plants.|I think I have to complain to the (B3/S23) committee...",
+            "Day 4 message",
+            "Day 5 message",
+            "Day 6 message",
+            "Day 7 message",
+            "Day 8 message",
+            "Day 9 message",
+            "Day 10 message",
+            "Day 11 message",
+            "Day 12 message",
+            "Day 13 message",
+            "Day 14 message"
+        };
+
+        var sections = websites[Manager.Instance.day - 1].Split('|');
+        foreach (var s in sections)
+            QueMessage(s);
+
+        CheckQueuedMessages();
     }
 
     void Fertilizer1()

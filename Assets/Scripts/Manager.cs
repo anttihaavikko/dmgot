@@ -19,6 +19,7 @@ public class Manager : MonoBehaviour {
     public int day = 1;
     public int cuts = 0;
     public int fertilizers = 0;
+    public int daysWithoutEating = 0;
 
     public bool hasSeenDead = false;
     public bool hasSeenFruit = false;
@@ -55,6 +56,7 @@ public class Manager : MonoBehaviour {
         day = 1;
         cuts = 0;
         fertilizers = 0;
+        daysWithoutEating = 0;
         hasData = false;
         didSleep = false;
         hasEaten = false;
