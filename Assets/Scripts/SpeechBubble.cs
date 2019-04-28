@@ -200,7 +200,7 @@ public class SpeechBubble : MonoBehaviour {
 
             UpdateMenu();
 
-            if(Input.GetButtonDown("Interact"))
+            if(Input.GetButtonUp("Interact"))
             {
                 Invoke(optionActions[optionSelection], 0f);
                 Hide();
@@ -211,7 +211,7 @@ public class SpeechBubble : MonoBehaviour {
         if (Input.GetButtonUp("Interact"))
             EnableSkip();
 
-		if (shown && (Input.GetButtonDown("Interact") || (hidesWithAny && Input.anyKeyDown)) && canSkip) {
+		if (shown && (Input.GetButtonUp("Interact") || (hidesWithAny && Input.anyKeyDown)) && canSkip) {
             HideHelp();
 
 			if (!done) {
