@@ -165,7 +165,7 @@ public class Farmer : MonoBehaviour
 
             if (tileType == Tile.DEAD)
             {
-                field.fertilizers++;
+                Manager.Instance.fertilizers++;
 
                 AudioManager.Instance.PlayEffectAt(0, transform.position, 1f);
                 AudioManager.Instance.PlayEffectAt(14, transform.position, 1f);
@@ -254,16 +254,38 @@ public class Farmer : MonoBehaviour
         Manager.Instance.day++;
         Manager.Instance.didSleep = true;
         dimmer.Close();
+
+        if(Manager.Instance.cuts >= 5)
+        {
+            Manager.Instance.endTextOne = "But he never woke up";
+            Manager.Instance.endTextTwo = "Due to losing too much blood";
+            Invoke("GoEnd", 2f);
+            return;
+        }
+
+        if (Manager.Instance.day > 14)
+        {
+            Manager.Instance.endTextOne = "The two weeks is done";
+            Manager.Instance.endTextTwo = Manager.Instance.cash > 200 ? "And he earned enough for rent, congratulations!" : "But he didn't earn enough for the rent...";
+            Invoke("GoEnd", 2f);
+            return;
+        }
+
         mid.Show("DAY " + Manager.Instance.day, "$" + Manager.Instance.cash);
         Invoke("OpenDimmer", 4f);
 
-        if(Manager.Instance.hasEaten && Manager.Instance.cuts < 5)
+        if (Manager.Instance.hasEaten && Manager.Instance.cuts < 5)
         {
             Manager.Instance.cuts = 0;
             Invoke("UpdateSaturation", 4f);
         }
 
         Manager.Instance.hasEaten = false;
+    }
+
+    void GoEnd()
+    {
+        ChangeScene("End");
     }
 
     void OpenDimmer()

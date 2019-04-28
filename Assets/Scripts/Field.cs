@@ -9,7 +9,6 @@ public class Field : MonoBehaviour
     public Tile tile;
     public TextMeshPro interactText;
     public Transform helpText;
-    public int fertilizers;
     public bool isOn = true;
     public SpeechBubble bubble;
 
@@ -99,7 +98,7 @@ public class Field : MonoBehaviour
         switch (grid[index].type)
         {
             case Tile.NONE:
-                if (fertilizers > 0)
+                if (Manager.Instance.fertilizers > 0)
                 {
                     interactText.text = "FERTILIZE";
                 }
@@ -162,9 +161,9 @@ public class Field : MonoBehaviour
             var tileType = GetTileType(pos);
             if(tileType == Tile.NONE)
             {
-                if(fertilizers > 0)
+                if(Manager.Instance.fertilizers > 0)
                 {
-                    fertilizers--;
+                    Manager.Instance.fertilizers--;
                     grid[index].Interact();
                 }
             }

@@ -242,7 +242,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 22be6cc93e7b54efc8e74d34ad334a19, type: 3}
   - {fileID: 8300000, guid: 824133d14656f4b68acbc87714535e03, type: 3}
   - {fileID: 8300000, guid: ba6196e3986714a5f89ec23aa70d4ed6, type: 3}
-  - {fileID: 8300000, guid: 339871f4eaa5547cdb4563b03a05bbdb, type: 3}
+  - {fileID: 8300000, guid: 487fafa240dff4804b201ddf59890bb7, type: 3}
   - {fileID: 8300000, guid: bb0e263af792a4448b8a14d3addb4cf8, type: 3}
   lowpass: {fileID: 8092627126164281818}
   highpass: {fileID: 8092627126164281817}

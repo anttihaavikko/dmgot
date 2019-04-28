@@ -11,10 +11,12 @@ public class Manager : MonoBehaviour {
     public bool hasData = false;
     public bool didSleep = false;
     public bool hasEaten = false;
+    public string endTextOne = "end result", endTextTwo = "end reason";
 
     public int cash = 0;
     public int day = 1;
     public int cuts = 0;
+    public int fertilizers = 0;
 
     public bool hasSeenDead = false;
     public bool hasSeenFruit = false;
@@ -34,4 +36,18 @@ public class Manager : MonoBehaviour {
             DontDestroyOnLoad(instance.gameObject);
         }
 	}
+
+    public void Redo()
+    {
+        justStarted = true;
+        cash = 0;
+        day = 1;
+        cuts = 0;
+        fertilizers = 0;
+        hasData = false;
+        hasSeenDead = false;
+        hasSeenFruit = false;
+        didSleep = false;
+        hasEaten = false;
+    }
 }
