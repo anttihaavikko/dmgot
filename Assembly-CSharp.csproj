@@ -146,6 +146,7 @@
     <Compile Include="Assets\Scripts\Fruit.cs" />
     <Compile Include="Assets\Scripts\GeometryFromColliderScript.cs" />
     <Compile Include="Assets\Scripts\GrassBlades.cs" />
+    <Compile Include="Assets\Scripts\HoldEscToQuit.cs" />
     <Compile Include="Assets\Scripts\HudManager.cs" />
     <Compile Include="Assets\Scripts\InputMagic.cs" />
     <Compile Include="Assets\Scripts\Manager.cs" />

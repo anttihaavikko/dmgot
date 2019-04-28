@@ -1,17 +1,16 @@
 ﻿<Properties StartupConfiguration="{A88FA4ED-6EA7-367D-4906-2D7BE2DE803D}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/RandomizeRotation.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/HoldEscToQuit.cs">
     <Files>
-      <File FileName="Assets/Scripts/Farmer.cs" Line="248" Column="51" />
-      <File FileName="Assets/Scripts/Field.cs" Line="30" Column="50" />
+      <File FileName="Assets/Scripts/Farmer.cs" Line="249" Column="79" />
+      <File FileName="Assets/Scripts/Field.cs" Line="139" Column="107" />
       <File FileName="Assets/Scripts/Tile.cs" Line="82" Column="1" />
       <File FileName="Assets/Scripts/FarmerAnim.cs" Line="20" Column="28" />
       <File FileName="Assets/Scripts/Manager.cs" Line="9" Column="36" />
       <File FileName="Assets/Scripts/AudioManager.cs" Line="98" Column="29" />
-      <File FileName="Assets/Scripts/SpeechBubble.cs" Line="122" Column="89" />
-      <File FileName="Assets/Scripts/AppearAfter.cs" Line="13" Column="3" />
-      <File FileName="Assets/Scripts/TheEnd.cs" Line="80" Column="47" />
+      <File FileName="Assets/Scripts/SpeechBubble.cs" Line="114" Column="6" />
       <File FileName="Assets/Scripts/StartScript.cs" Line="14" Column="28" />
-      <File FileName="Assets/Scripts/RandomizeRotation.cs" Line="10" Column="30" />
+      <File FileName="Assets/Scripts/RandomizeRotation.cs" Line="10" Column="90" />
+      <File FileName="Assets/Scripts/HoldEscToQuit.cs" Line="32" Column="42" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
