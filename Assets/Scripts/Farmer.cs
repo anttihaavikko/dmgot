@@ -433,6 +433,8 @@ public class Farmer : MonoBehaviour
 
         AudioManager.Instance.PlayEffectAt(14, mouth.position, 1f);
         AudioManager.Instance.PlayEffectAt(16, mouth.position, 0.6f);
+
+        EffectManager.Instance.AddEffect(3, mouth.position);
     }
 
     void DoInsideTutorialMessages()
