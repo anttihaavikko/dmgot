@@ -95,6 +95,8 @@ public class Farmer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        transform.localScale = Vector3.MoveTowards(transform.localScale, Vector3.one, Time.deltaTime * 0.5f);
+
         if (locked || Manager.Instance.menuing)
             return;
 
@@ -150,6 +152,10 @@ public class Farmer : MonoBehaviour
         pos = target;
 
         if (Mathf.Abs(dx) > 0f || Mathf.Abs(dy) > 0f) {
+
+            EffectManager.Instance.AddEffectToParent(1, transform.position, transform);
+
+            transform.localScale = new Vector3(Mathf.Abs(dx) > 0f ? 1.1f : 0.9f, Mathf.Abs(dy) > 0f ? 1.1f : 0.9f, 1f);
 
             AudioManager.Instance.PlayEffectAt(26, transform.position, 0.5f);
             AudioManager.Instance.PlayEffectAt(1, transform.position, 0.75f);
@@ -238,6 +244,7 @@ public class Farmer : MonoBehaviour
                 field.Interact(pos);
                 locked = true;
                 Invoke("Unlock", 0.15f);
+                EffectManager.Instance.AddEffect(2, transform.position + Vector3.up * 0.3f);
             }
         }
 

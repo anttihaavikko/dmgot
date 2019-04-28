@@ -2577,10 +2577,15 @@ MonoBehaviour:
   day: 1
   cuts: 0
   fertilizers: 0
+  daysWithoutEating: 0
   hasSeenDead: 0
   hasSeenFruit: 0
   hasSeenHalf: 0
   hasSeenIntro: 0
+  hasSeenFourCuts: 0
+  menuing: 0
+  messages: []
+  mailForDayAdded: 0
 --- !u!4 &1672254666
 Transform:
   m_ObjectHideFlags: 0
