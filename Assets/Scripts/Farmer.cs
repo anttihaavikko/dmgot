@@ -56,7 +56,7 @@ public class Farmer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (locked)
+        if (locked || Manager.Instance.menuing)
             return;
 
         DoMove();
@@ -265,8 +265,8 @@ public class Farmer : MonoBehaviour
 
         if (Manager.Instance.day > 14)
         {
-            Manager.Instance.endTextOne = "The two weeks is done";
-            Manager.Instance.endTextTwo = Manager.Instance.cash > 200 ? "And he earned enough for rent, congratulations!" : "But he didn't earn enough for the rent...";
+            Manager.Instance.endTextOne = "The (two weeks) is done";
+            Manager.Instance.endTextTwo = Manager.Instance.cash > 200 ? "And he earned enough for the rent, (congratulations)!" : "But he didn't earn enough for the rent...";
             Invoke("GoEnd", 2f);
             return;
         }
@@ -296,6 +296,8 @@ public class Farmer : MonoBehaviour
             tableFruit.Show();
 
         dimmer.Open();
+
+        Invoke("DoInsideTutorialMessages", 1f);
     }
 
     public void Bleed()
@@ -350,5 +352,24 @@ public class Farmer : MonoBehaviour
 
         AudioManager.Instance.PlayEffectAt(14, mouth.position, 1f);
         AudioManager.Instance.PlayEffectAt(16, mouth.position, 0.6f);
+    }
+
+    void DoInsideTutorialMessages()
+    {
+        if (Manager.Instance.day >= 8 && !Manager.Instance.hasSeenHalf)
+        {
+            Manager.Instance.hasSeenHalf = true;
+            bubble.QueMessage("Uh oh, first the first week is gone already...");
+            bubble.QueMessage("...and I'm still missing ($" + (Manager.goalCash - Manager.Instance.cash) + ") from my rent money.");
+        }
+
+        bubble.CheckQueuedMessages();
+    }
+
+    public void AccessComputer()
+    {
+        bubble.QueMessage("What should I do?");
+        bubble.QueMessage("[OPTIONS1]");
+        bubble.CheckQueuedMessages();
     }
 }

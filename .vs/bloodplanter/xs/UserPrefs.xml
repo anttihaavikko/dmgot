@@ -1,5 +1,5 @@
 ﻿<Properties StartupConfiguration="{A88FA4ED-6EA7-367D-4906-2D7BE2DE803D}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Dimmer.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Farmer.cs">
     <Files>
       <File FileName="Assets/Scripts/Farmer.cs" Line="275" Column="34" />
       <File FileName="Assets/Scripts/Field.cs" Line="279" Column="54" />
@@ -10,8 +10,6 @@
       <File FileName="Assets/Scripts/SpeechBubble.cs" Line="78" Column="66" />
       <File FileName="Assets/Scripts/AppearAfter.cs" Line="24" Column="3" />
       <File FileName="Assets/Scripts/TheEnd.cs" Line="69" Column="6" />
-      <File FileName="Assets/Scripts/MidScene.cs" Line="29" Column="5" />
-      <File FileName="Assets/Scripts/Dimmer.cs" Line="34" Column="14" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

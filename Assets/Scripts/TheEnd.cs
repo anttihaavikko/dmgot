@@ -20,8 +20,9 @@ public class TheEnd : MonoBehaviour
 
         texts[0].text = "DAY " + Manager.Instance.day;
         texts[1].text = "$" + Manager.Instance.cash;
-        texts[2].text = Manager.Instance.endTextOne;
-        texts[3].text = Manager.Instance.endTextTwo;
+
+        texts[2].text = Manager.Instance.endTextOne.Replace("(", "<color=" + hilite + ">").Replace(")", "</color>");
+        texts[3].text = Manager.Instance.endTextTwo.Replace("(", "<color=" + hilite + ">").Replace(")", "</color>");
 
         texts[4].text = Colorized("TRY AGAIN");
         texts[5].text = "QUIT";

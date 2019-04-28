@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class Manager : MonoBehaviour {
 
+    public const int goalCash = 225;
+
     public int[] grid;
     public bool justStarted = true;
     public bool hasData = false;
@@ -20,6 +22,10 @@ public class Manager : MonoBehaviour {
 
     public bool hasSeenDead = false;
     public bool hasSeenFruit = false;
+    public bool hasSeenHalf = false;
+    public bool hasSeenIntro = false;
+
+    public bool menuing = false;
 
     private static Manager instance = null;
 	public static Manager Instance {
@@ -45,9 +51,12 @@ public class Manager : MonoBehaviour {
         cuts = 0;
         fertilizers = 0;
         hasData = false;
-        hasSeenDead = false;
-        hasSeenFruit = false;
         didSleep = false;
         hasEaten = false;
+
+        hasSeenDead = false;
+        hasSeenFruit = false;
+        hasSeenHalf = true;
+        hasSeenIntro = false;
     }
 }

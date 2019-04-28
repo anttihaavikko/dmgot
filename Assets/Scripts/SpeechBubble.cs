@@ -34,8 +34,12 @@ public class SpeechBubble : MonoBehaviour {
     bool useColors = true;
     private bool canSkip = false;
 
-	// Use this for initialization
-	void Awake () {
+    private string[] options;
+    private string[] optionActions;
+    private int optionSelection;
+
+    // Use this for initialization
+    void Awake () {
 		textArea.text = "";
 		shownSize = transform.localScale;
 		transform.localScale = hiddenSize;
@@ -63,8 +67,49 @@ public class SpeechBubble : MonoBehaviour {
         canSkip = true;
     }
 
+    void ShowBank()
+    {
+        ShowMessage("My balance: ($" + Manager.Instance.cash + ")\nFertilizers in stock: " + Manager.Instance.fertilizers);
+    }
+
+    void ShowMail()
+    {
+        ShowMessage("Mail etc etc");
+    }
+
+    void ShowShop()
+    {
+        ShowMessage("Shop etc etc");
+    }
+
+    void ShowBrowse()
+    {
+        ShowMessage("Browsing");
+    }
+
     // Update is called once per frame
     void Update () {
+
+        if(Manager.Instance.menuing)
+        {
+            int y = 0;
+
+            if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S)) y = 1;
+            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) y = -1;
+
+            optionSelection = (optionSelection + y) % options.Length;
+            if (optionSelection == -1)
+                optionSelection = options.Length - 1;
+
+            UpdateMenu();
+
+            if(Input.GetButtonDown("Interact"))
+            {
+                Invoke(optionActions[optionSelection], 0f);
+                Hide();
+                Manager.Instance.menuing = false;
+            }
+        }
 
         if (Input.GetButtonUp("Interact"))
             EnableSkip();
@@ -134,7 +179,22 @@ public class SpeechBubble : MonoBehaviour {
 		textArea.text = message;
 	}
 
-	public void ShowMessage(string str, bool colors = true) {
+    void UpdateMenu()
+    {
+        message = "\n";
+
+        for(int i = 0; i < options.Length; i++)
+        {
+            message += optionSelection == i ? "> (" + options[i] + ") <" : options[i];
+            message += "\n";
+        }
+
+        message += "\n";
+
+        textArea.text = message.Replace("(", "<color=" + hiliteColorHex + ">").Replace(")", "</color>");
+    }
+
+    public void ShowMessage(string str, bool colors = true) {
         hidesWithAny = false;
         helpImage.transform.localScale = Vector3.zero;
         canSkip = false;
@@ -143,7 +203,7 @@ public class SpeechBubble : MonoBehaviour {
         AudioManager.Instance.PlayEffectAt(9, transform.position, 1f);
         AudioManager.Instance.PlayEffectAt(27, transform.position, 0.7f);
 
-        if(str.Contains("[IMAGE1]"))
+        if (str.Contains("[IMAGE1]"))
         {
             hidesWithAny = true;
             str = " ";
@@ -170,7 +230,23 @@ public class SpeechBubble : MonoBehaviour {
 		textArea.text = "";
 
 		Invoke ("ShowText", 0.2f);
-	}
+
+        if (str.Contains("[OPTIONS1]"))
+        {
+            HideHelp();
+            Manager.Instance.menuing = true;
+            CancelInvoke("ShowText");
+            CancelInvoke("ShowHelp");
+            string[] opts = { "Bank", "Mail", "Browse", "Shop", "Nothing" };
+            string[] optActs = { "ShowBank", "ShowMail", "ShowBrowse", "ShowShop", "Hide" };
+            optionSelection = 0;
+            options = opts;
+            optionActions = optActs;
+            SkipMessage();
+            UpdateMenu();
+            HideHelp();
+        }
+    }
 
 	public void QueMessage(string str) {
 		messageQue.Add (str);

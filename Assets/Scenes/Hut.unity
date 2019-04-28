@@ -234,7 +234,18 @@ MonoBehaviour:
   action: USE
   method:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 80477742}
+        m_MethodName: AccessComputer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &39083086
@@ -1826,7 +1837,6 @@ MonoBehaviour:
   tile: {fileID: 2910496509456673887, guid: 0c1e3b987cfa44387828c66ba37e3f97, type: 3}
   interactText: {fileID: 1964023703}
   helpText: {fileID: 1950167384}
-  fertilizers: 0
   isOn: 0
   bubble: {fileID: 819064494}
 --- !u!4 &1173915031
@@ -2561,11 +2571,16 @@ MonoBehaviour:
   hasData: 0
   didSleep: 0
   hasEaten: 0
+  endTextOne: end result
+  endTextTwo: end reason
   cash: 0
   day: 1
   cuts: 0
+  fertilizers: 0
   hasSeenDead: 0
   hasSeenFruit: 0
+  hasSeenHalf: 0
+  hasSeenIntro: 0
 --- !u!4 &1672254666
 Transform:
   m_ObjectHideFlags: 0
